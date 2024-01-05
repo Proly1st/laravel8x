@@ -1768,11 +1768,11 @@
                                                                 <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của đồng hồ</span>
                                                                     <input class="tabledit-input form-control input-sm" type="text" name="Last" value="Otto">
                                                                 </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">true</span>
+                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Đã bị xóa -1</span>
                                                                     <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
-                                                <option value="1">@mdo</option>
-                                                <option value="2">@fat</option>
-                                                <option value="3">@twitter</option>
+                                                <option value="1">Đang hoạt động</option>
+                                                <option value="2">Tạm ngưng</option>
+                                                <option value="3">Đã bị xóa</option>
                                             </select>
                                                                 </td>
                                                             </tr>
@@ -1784,12 +1784,12 @@
                                                                 <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của thiết bị điện tử</span>
                                                                     <input class="tabledit-input form-control input-sm" type="text" name="Last" value="Thornton" disabled="">
                                                                 </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">true</span>
+                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Tạm ngưng 0</span>
                                                                     <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
-                                                <option value="1">@mdo</option>
-                                                <option value="2">@fat</option>
-                                                <option value="3">@twitter</option>
-                                            </select>
+                                                                        <option value="1">Đang hoạt động</option>
+                                                                        <option value="2">Tạm ngưng</option>
+                                                                        <option value="3">Đã bị xóa</option>
+                                                                    </select>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -1800,12 +1800,12 @@
                                                                 <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của nội thất</span>
                                                                     <input class="tabledit-input form-control input-sm" type="text" name="Last" value="the Bird" disabled="">
                                                                 </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">False</span>
+                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Đang hoạt động 1</span>
                                                                     <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
-                                                <option value="1">@mdo</option>
-                                                <option value="2">@fat</option>
-                                                <option value="3">@twitter</option>
-                                            </select>
+                                                                    <option value="1">Đang hoạt động</option>
+                                                                    <option value="2">Tạm ngưng</option>
+                                                                    <option value="3">Đã bị xóa</option>
+                                                                </select>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -1819,24 +1819,24 @@
                                                 <h3 class="f-26">Add Category</h3>
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control pname" placeholder="Category Name">
+                                                        <input id="CategoryName" type="text" class="form-control pname" placeholder="Category Name">
                                                         
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pname" placeholder="Description">
+                                                        <input id="decript" type="text" class="form-control pname" placeholder="Description">
                                                     </div>
                                                    
                                                     <div class="input-group">
-                                                        <select id="hello-single" class="form-control stock">
+                                                        <select id="statuss hello-single" class="form-control stock">
                                                             <option value="">---- Select Status ----</option>
-                                                            <option value="married">True</option>
-                                                            <option value="unmarried">False</option>
-                                                            <!-- <option value="unmarried">Law Stock</option> -->
+                                                            <option value="1">Đang hoạt động</option>
+                                                            <option value="0">Tạm ngưng</option>
+                                                            <option value="-1">Đã bị xóa</option>
                                                         </select>
                                                     </div>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                        <button id="saveCategory" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
                                                         <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn">Close</button>
                                                     </div>
                                                 </div>
@@ -1907,7 +1907,11 @@
 <![endif]-->
     <!-- Warning Section Ends -->
     <!-- js tự viết -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ asset('asset/js/jsCategory.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
@@ -1958,7 +1962,6 @@
     <script src="{{ asset('asset/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

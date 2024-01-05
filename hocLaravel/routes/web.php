@@ -18,23 +18,23 @@ use Illuminate\Http\Request;
 
  Route::get('/', [ProductController::class,'index']);
 
- Route::post('/xuLyRandom', [HomeController::class,'Random'] );
+//  Route::post('/xuLyRandom', [HomeController::class,'Random'] );
 
- Route::post('/mangTangDan', [HomeController::class, 'MangTangDan' ]);
+//  Route::post('/mangTangDan', [HomeController::class, 'MangTangDan' ]);
 
- Route::post('/mangGiamDan',[HomeController::class,'MangGiamDan' ]);
+//  Route::post('/mangGiamDan',[HomeController::class,'MangGiamDan' ]);
 
- Route::post('/tongMang',[HomeController::class,'TongMang']);
+//  Route::post('/tongMang',[HomeController::class,'TongMang']);
 
- Route::post('/maxMang',[HomeController::class,'MaxMang']);
+//  Route::post('/maxMang',[HomeController::class,'MaxMang']);
 
- Route::post('/mangGiong', [HomeController::class,'MangGiong']);
+//  Route::post('/mangGiong', [HomeController::class,'MangGiong']);
 
- Route::post('/mangKhac',  [HomeController::class, 'MangKhac']);
+//  Route::post('/mangKhac',  [HomeController::class, 'MangKhac']);
 
- Route::post ('/soNguyenTo',[HomeController::class,'SoNguyenTo']);
+//  Route::post ('/soNguyenTo',[HomeController::class,'SoNguyenTo']);
 
- Route::post ('/phanTuLe',[HomeController::class, 'PhanTuLe']);
+//  Route::post ('/phanTuLe',[HomeController::class, 'PhanTuLe']);
 
  
 Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);
@@ -42,3 +42,5 @@ Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);
 Route::get('/product', [ProductController::class,'Product'])->name('products');
 
 Route::get('/Categories',[ProductController::class,'Categories'])->name('categories');
+
+Route::post('/AddCategory',[ProductController::class,'AddCategories'])->name('AddCategory');
