@@ -33,11 +33,10 @@ class ProductController extends Controller
         $statuss = $request -> get('statuss');
 
 
-        $query = "
-        INSERT INTO categories (name, description, status,created_at, updated_at)
-        VALUES (?, ?,?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) ";
+        $query = " INSERT INTO categories (name, description, status,created_at, updated_at)
+        VALUES (?, ?,?, NOW(), NOW()) ";
 
-        DB::statement($query, [$nameCategory, $decript ,$statuss]);
+        DB::insert($query, [$nameCategory, $decript ,$statuss]);
         return 'Category added successfully!';
     }
 }

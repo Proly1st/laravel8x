@@ -1828,13 +1828,15 @@
                                                     </div>
                                                    
                                                     <div class="input-group">
-                                                        <select id="statuss hello-single" class="form-control stock">
+                                                        <select id="statuss" class="form-control stock">
                                                             <option value="">---- Select Status ----</option>
                                                             <option value="1">Đang hoạt động</option>
                                                             <option value="0">Tạm ngưng</option>
                                                             <option value="-1">Đã bị xóa</option>
                                                         </select>
+                                                        
                                                     </div>
+                                                   
                                                     <div class="text-center">
                                                         <button id="saveCategory" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
                                                         <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn">Close</button>
