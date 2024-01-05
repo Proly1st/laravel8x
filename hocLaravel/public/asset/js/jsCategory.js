@@ -14,11 +14,12 @@ $(function(){
                 statuss :statuss
             }
         }).then(function(res){
+            $("#modal-13").hide();
             alert(res.data);
-            // Tự động đóng cửa sổ popup sau 3 giây (3000 milliseconds)
-            if (popupWindow && !popupWindow.closed) {
-                popupWindow.close();
-              }
+            setTimeout(function() {
+                window.location.href = "/Categories";
+              }, 0);
+           
         })
         
     })

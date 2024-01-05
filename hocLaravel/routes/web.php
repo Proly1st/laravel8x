@@ -41,6 +41,7 @@ Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);
 
 Route::get('/product', [ProductController::class,'Product'])->name('products');
 
-Route::get('/Categories',[ProductController::class,'Categories'])->name('categories');
 
 Route::post('/AddCategory',[ProductController::class,'AddCategories'])->name('AddCategory');
+
+Route::get('/Categories', [ProductController::class,'showCategories'])->name('categories');

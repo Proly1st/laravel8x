@@ -14,9 +14,9 @@ class ProductController extends Controller
     }
     public function index(){
         
-         return view('categories');
+        //  return view('categories');
         
-        //  return view('products');
+         return view('products');
     }
 
     public function Product(){
@@ -39,4 +39,12 @@ class ProductController extends Controller
         DB::insert($query, [$nameCategory, $decript ,$statuss]);
         return 'Category added successfully!';
     }
+    
+    public function showCategories(){
+      
+        $categories = DB::table('categories')->get();
+        // dd($categories);
+        return view('categories', ['categ' => $categories]);
+    }
+
 }

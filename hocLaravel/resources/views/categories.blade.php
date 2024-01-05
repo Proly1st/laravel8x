@@ -1760,54 +1760,40 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            
+                                                            @foreach( $categ as $category)
+                                                           
+                                                           
                                                             <tr>
-                                                                <th scope="row">1</th>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Đồng Hồ</span>
+                                                                <th scope="row">{{$category ->id}}</th>
+                                                                <td class="tabledit-view-mode"><span class="tabledit-span">{{$category->name}}</span>
                                                                     <input class="tabledit-input form-control input-sm" type="text" name="First" value="Mark">
                                                                 </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của đồng hồ</span>
+                                                                <td class="tabledit-view-mode"><span class="tabledit-span">{{$category->description}}</span>
                                                                     <input class="tabledit-input form-control input-sm" type="text" name="Last" value="Otto">
                                                                 </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Đã bị xóa -1</span>
-                                                                    <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
-                                                <option value="1">Đang hoạt động</option>
-                                                <option value="2">Tạm ngưng</option>
-                                                <option value="3">Đã bị xóa</option>
-                                            </select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Thiết bị điện tử</span>
-                                                                    <input class="tabledit-input form-control input-sm" type="text" name="First" value="Jacob" disabled="">
-                                                                </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của thiết bị điện tử</span>
-                                                                    <input class="tabledit-input form-control input-sm" type="text" name="Last" value="Thornton" disabled="">
-                                                                </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Tạm ngưng 0</span>
+                                                                <td class="tabledit-view-mode">
+                                                                @switch( $category-> status)
+                                                                    @case('1')    
+                                                                    <span class="tabledit-span">Đang hoạt động</span>
+                                                                    @break
+                                                                    @case('0')    
+                                                                    <span class="tabledit-span">Tạm ngưng</span>
+                                                                    @break
+                                                                    @case('-1')    
+                                                                    <span class="tabledit-span">Đã bị xóa</span>
+                                                                    @break
+                                                                @endswitch
                                                                     <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
                                                                         <option value="1">Đang hoạt động</option>
-                                                                        <option value="2">Tạm ngưng</option>
-                                                                        <option value="3">Đã bị xóa</option>
+                                                                        <option value="0">Tạm ngưng</option>
+                                                                        <option value="-1">Đã bị xóa</option>
                                                                     </select>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Nội thất</span>
-                                                                    <input class="tabledit-input form-control input-sm" type="text" name="First" value="Larry" disabled="">
-                                                                </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Mô tả của nội thất</span>
-                                                                    <input class="tabledit-input form-control input-sm" type="text" name="Last" value="the Bird" disabled="">
-                                                                </td>
-                                                                <td class="tabledit-view-mode"><span class="tabledit-span">Đang hoạt động 1</span>
-                                                                    <select class="tabledit-input form-control input-sm" name="Nickname" disabled="" style="display:none;">
-                                                                    <option value="1">Đang hoạt động</option>
-                                                                    <option value="2">Tạm ngưng</option>
-                                                                    <option value="3">Đã bị xóa</option>
-                                                                </select>
-                                                                </td>
-                                                            </tr>
+                                                          
+                                                            @endforeach
+                                                           
                                                         </tbody>
                                                     </table>
                                                 </div>
