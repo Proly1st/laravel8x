@@ -39,6 +39,13 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/asset/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/asset/css/jquery.mCustomScrollbar.css') }}">
+      <!-- notify js Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.brighttheme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.buttons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.history.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.mobile.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/pages/pnotify/notify.css') }}">
 </head>
 
 <body>
@@ -1737,13 +1744,18 @@
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                   <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
                                                 <!-- Product list card start -->
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Product List</h5>
                                                         <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5"></i> Add Product
-                                </button>
+                                                         </button>
                                                     </div>
+                                                   
                                                     <div class="card-block">
                                                         <div class="table-responsive">
                                                             <div class="table-content">
@@ -1758,50 +1770,64 @@
                                                                                 <th>Status</th>
                                                                                 <th>Price</th>                                                                               <th>Promotion</th>
                                                                                 <th>Promotion_type</th>
-                                                                                <!-- <th>Action</th> -->
+                                                                                <th>Action</th>
 
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
+
+                                                                        @foreach ($queryProducts as $products)
+
                                                                             <tr>
+                                                                           
                                                                                 <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l1.png') }}" class="img-fluid" alt="tbl">
+                                                                                    <img src="{{asset($products->image)}}" class="img-fluid" alt="tbl"style="width: 72px; height: auto;">
                                                                                 </td>
                                                                                 <td class="pro-name">
-                                                                                    <h6>Frock Designs</h6>
+                                                                                    <h6>{{$products->name}}</h6>
+                                                                                    
                                                                                 </td>
-                                                                                <td>456</td>
-                                                                                   
-                                                                                <td>  <span>Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span></td>
-                                                                                <td>Đang hoạt động</td>
-                                                                                <td>200.000vnd</td>
-                                                                                <td>10%</td>
-                                                                                <td>kiểu khuyến mãi</td>
+                                                                                <td>{{$products->inventory}}</td>
+
+                                                                                <td>{{$products->description}}</td>
+
+                                                                                <td>
+
+                                                                                    @switch( $products->status)
+                                                                                    @case('1')    
+                                                                                    <span class="tabledit-span">Đang hoạt động</span>
+                                                                                    @break
+                                                                                    @case('0')    
+                                                                                    <span class="tabledit-span">Tạm ngưng</span>
+                                                                                    @break
+                                                                                    @case('-1')    
+                                                                                    <span class="tabledit-span">Đã bị xóa</span>
+                                                                                    @break
+                                                                                    @endswitch
+                                                                                </td>
+                                                                                <td>{{$products->price}}</td>
+                                                                                <td>{{$products->promotion}}</td>
+                                                                                <td>{{$products->promotion_type}}</td>
+
                                                                               
-                                                                                <td class="action-icon">
+                                                                                <!-- <td class="action-icon">
                                                                                     <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
                                                                                     <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l6.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> Style Tops </h6>
-                                                                                   
-                                                                                </td>
-                                                                                <td>689</td>
-                                                                                <td> <span>Interchargebla lens Digital Camera with <br>APS-C-X Trans CMOS Sens</span></td>
-                                                                                <td>Đang hoạt động</td>
-                                                                                <td>200.000vnd</td>
-                                                                                <td>10%</td>
-                                                                                <td>kiểu khuyến mãi</td>
+                                                                                </td> -->
                                                                                 <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                                                    <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                                        <i class="icofont icofont-ui-edit"></i>
+                                                                                    </a>
+                                                                                    <a href="#!" class="text-muted delete-btn" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                                                        <i class="icofont icofont-delete-alt"></i>
+                                                                                    </a>
+                                                                                    <div class="edit-input" style="display: none;">
+                                                                                        <input type="text" class="form-control" value="{{$products->name}}">
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
+                                                                            
+                                                                            @endforeach
                                                                             
                                                                         </tbody>
                                                                     </table>
@@ -1817,45 +1843,51 @@
                                         <div class="md-modal md-effect-13 addcontact" id="modal-13">
                                             <div class="md-content">
                                                 <h3 class="f-26">Add Product</h3>
+                                                
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control pname" placeholder="Prodcut Name">
-                                                        <span class="input-group-addon btn btn-primary">Chooese File</span>
+                                                    <input id="imageFile" type="file" class="form-control" accept="image/*" name="image">
+                                                    </div>
+                                                   
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                                        <input id="name-product" type="text" class="form-control pname" placeholder="Prodcut Name">
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pname" placeholder="Prodcut Name">
+                                                        <input id="inventory-product" type="text" class="form-control pamount" placeholder="Inventory">
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pamount" placeholder="Inventory">
+                                                        <input id="descript-product" type="text" class="form-control pamount" placeholder="Description">
                                                     </div>
+                                                    
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pamount" placeholder="Description">
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <select id="hello-single" class="form-control stock">
+                                                        <select id="select-status" class="form-control stock">
                                                             <option value="">---- Status ----</option>
-                                                            <option value="married">Tạm ngưng</option>
-                                                            <option value="unmarried">Đang hoạt động</option>
-                                                            <option value="unmarried">Đã bị xóa</option>
+                                                            <option value="0">Tạm ngưng</option>
+                                                            <option value="1">Đang hoạt động</option>
+                                                            <option value="-1">Đã bị xóa</option>
                                                         </select>
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pamount" placeholder="Price">
+                                                        <input id="price-product" type="text" class="form-control pamount" placeholder="Price">
                                                     </div>
-                                                    <div class="input-group">
-                                                        <select id="hello-single" class="form-control stock">
+                                                    <div class="input-group"> 
+                                                   
+                                                        <select id="select-category" class="form-control stock">
                                                             <option value="">---- Categories ----</option>
-                                                            <option value="married">Đồng Hồ</option>
-                                                            <option value="unmarried">Thiết bị điện tử</option>
-                                                            <option value="unmarried">Nội thất</option>
+                                                            @foreach( $categ as $category)
+                                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endforeach
                                                         </select>
+                                                                
+                                                
                                                     </div>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                        <button id="save-product"  type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                            
                                                         <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn">Close</button>
                                                     </div>
                                                 </div>
@@ -1878,52 +1910,22 @@
         </div>
     </div>
 
+  <!-- js tự viết -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('asset/js/jsCategory.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="{{ asset('') }}/asset/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="{{ asset('') }}/asset/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="{{ asset('') }}/asset/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="{{ asset('') }}/asset/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="{{ asset('') }}/asset/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+    <script type="text/javascript" src=" {{asset('bower_components/pnotify/js/pnotify.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.desktop.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.buttons.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.confirm.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.callbacks.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.animate.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.history.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.mobile.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('bower_components/pnotify/js/pnotify.nonblock.js ')}}"></script>
+    <script type="text/javascript" src="{{asset('asset/pages/pnotify/notify.js ')}}"></script>
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
@@ -1960,8 +1962,6 @@
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('/asset/js/script.js') }}"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

@@ -39,9 +39,12 @@ use Illuminate\Http\Request;
  
 Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);
 
-Route::get('/product', [ProductController::class,'Product'])->name('products');
+Route::get('/', [ProductController::class,'index'])->name('products');
 
 
 Route::post('/AddCategory',[ProductController::class,'AddCategories'])->name('AddCategory');
 
 Route::get('/Categories', [ProductController::class,'showCategories'])->name('categories');
+
+Route::post('/addProduct',[ProductController::class,'AddProduct'])->name('addProduct');
+

@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -14,9 +16,10 @@ class ProductController extends Controller
     }
     public function index(){
         
-        //  return view('categories');
+        $categories = DB::table('categories')->orderByDesc('created_at')->get();
+        $products = DB::table('products')->orderByDesc('created_at')->get();
         
-         return view('products');
+        return view('products',['categ' => $categories, 'queryProducts'=>$products]);
     }
 
     public function Product(){
@@ -42,9 +45,39 @@ class ProductController extends Controller
     
     public function showCategories(){
       
-        $categories = DB::table('categories')->get();
+        $categories = DB::table('categories')->orderByDesc('created_at')->get();
         // dd($categories);
         return view('categories', ['categ' => $categories]);
+    }
+
+    public function AddProduct(Request $request){
+       
+        if ($request->hasFile('image')) {
+            $product = new Product();
+
+            $image = $request->file('image')->store('public/images');
+           
+          
+            $product->image  = Storage::url($image);
+
+            $product->name = $request->get('name');
+            $product->category_id = $request->get('id_category');
+            $product->inventory = $request->get('inventory');
+            $product->description = $request->get('description');
+            $product->status = $request->get('status');
+            $product->price = $request->get('price');
+            $product->promotion = '1';
+            $product->promotion_type = 'khuyến mãi';
+            $product->created_at = NOW();
+            $product->updated_at = NOW();
+            $product->save();
+            return true;
+        } else {
+            return false;
+
+        }
+    
+
     }
 
 }

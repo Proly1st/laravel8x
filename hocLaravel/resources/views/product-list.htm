@@ -1737,12 +1737,16 @@
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-sm-12">
+                                                   <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
                                                 <!-- Product list card start -->
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Product List</h5>
                                                         <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5"></i> Add Product
-                                </button>
+                                                         </button>
                                                     </div>
                                                     <div class="card-block">
                                                         <div class="table-responsive">
@@ -1758,284 +1762,34 @@
                                                                                 <th>Status</th>
                                                                                 <th>Price</th>                                                                               <th>Promotion</th>
                                                                                 <th>Promotion_type</th>
+                                                                                <!-- <th>Action</th> -->
 
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                            @foreach ($queryProducts as $products)
                                                                             <tr>
                                                                                 <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l1.png') }}" class="img-fluid" alt="tbl">
+                                                                                    <img src="{{ asset($products->image) }}" class="img-fluid" alt="tbl" style="width: 72px; height: auto;">
                                                                                 </td>
                                                                                 <td class="pro-name">
-                                                                                    <h6>Frock Designs</h6>
-                                                                                    <span>Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span>
+                                                                                    <h6>{{$products->name}}</h6>
                                                                                 </td>
-                                                                                <td>$456</td>
-                                                                                <td></td>
-                                                                                <td>
-                                                                                    <label class="text-danger">Out Of Stock</label>
-                                                                                </td>
+                                                                                <td>{{$products->inventory}}</td>
+                                                                                   
+                                                                                <td>  <span>{{$products->description}}</span></td>
+                                                                                <td>{{$products->status}}</td>
+                                                                                <td>{{$products->price}}</td>
+                                                                                <td>{{$products->promotion}}</td>
+                                                                                <td>{{$products->promotion_type}}</td>
+                                                                              
                                                                                 <td class="action-icon">
                                                                                     <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
                                                                                     <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l6.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> Style Tops </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$689</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <!-- <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l2.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> Kurta Women </h6>
-                                                                                    <span>Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$755</td>
-                                                                                <td>
-                                                                                    <label class="text-warning">Low Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l3.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$989</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l4.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> Black Frock For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$1150</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l5.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$2006</td>
-                                                                                <td>
-                                                                                    <label class="text-danger">Out Of Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l7.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> Digital Print Top </h6>
-                                                                                    <span>sum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$1199</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l8.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> One Piece Dress</h6>
-                                                                                    <span class="text-muted f-12">Lorem ipsum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$589</td>
-                                                                                <td>
-                                                                                    <label class="text-warning">Low Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l9.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> kurat style Dress </h6>
-                                                                                    <span>sum dolor sit consec te imperdiet iaculis ipsum..</span>
-                                                                                </td>
-                                                                                <td>$1255</td>
-                                                                                <td>
-                                                                                    <label class="text-danger">Out Of Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr> -->
-                                                                            <!-- <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l8.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$499</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l7.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$259</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l6.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$456</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l5.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$456</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr> -->
-                                                                            <!-- <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l4.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$456</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l2.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$456</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="pro-list-img">
-                                                                                    <img src="{{ asset('/asset/images/product-list/pro-l1.png') }}" class="img-fluid" alt="tbl">
-                                                                                </td>
-                                                                                <td class="pro-name">
-                                                                                    <h6> T Shirts For Women </h6>
-                                                                                    <span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                                                                                </td>
-                                                                                <td>$456</td>
-                                                                                <td>
-                                                                                    <label class="text-success">In Stock</label>
-                                                                                </td>
-                                                                                <td class="action-icon">
-                                                                                    <a href="#!" class="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
-                                                                                    <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i>
-                                            </a>
-                                                                                </td>
-                                                                            </tr> -->
+                                                                            @endforeach
+                                                                            
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -2052,27 +1806,47 @@
                                                 <h3 class="f-26">Add Product</h3>
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control pname" placeholder="Prodcut Name">
-                                                        <span class="input-group-addon btn btn-primary">Chooese File</span>
+                                                    <input id="imageFile" type="file" class="form-control" accept="image/*" name="image">
+                                                    </div>
+                                                   
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                                        <input id="name-product" type="text" class="form-control pname" placeholder="Prodcut Name">
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pname" placeholder="Prodcut Name">
+                                                        <input id="inventory-product" type="text" class="form-control pamount" placeholder="Inventory">
                                                     </div>
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
-                                                        <input type="text" class="form-control pamount" placeholder="Amount">
+                                                        <input id="descript-product" type="text" class="form-control pamount" placeholder="Description">
                                                     </div>
+                                                    
                                                     <div class="input-group">
-                                                        <select id="hello-single" class="form-control stock">
-                                                            <option value="">---- Select Stock ----</option>
-                                                            <option value="married">In Stock</option>
-                                                            <option value="unmarried">Out of Stock</option>
-                                                            <option value="unmarried">Law Stock</option>
+                                                        <select id="select-status" class="form-control stock">
+                                                            <option value="">---- Status ----</option>
+                                                            <option value="0">Tạm ngưng</option>
+                                                            <option value="1">Đang hoạt động</option>
+                                                            <option value="-1">Đã bị xóa</option>
                                                         </select>
                                                     </div>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                                        <input id="price-product" type="text" class="form-control pamount" placeholder="Price">
+                                                    </div>
+                                                    <div class="input-group"> 
+                                                   
+                                                        <select id="select-category" class="form-control stock">
+                                                            <option value="">---- Categories ----</option>
+                                                            @foreach( $categ as $category)
+                                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                                
+                                                 
+                                                    </div>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                        <button id="save-product" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
                                                         <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn">Close</button>
                                                     </div>
                                                 </div>
@@ -2097,50 +1871,6 @@
 
 
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="{{ asset('') }}/asset/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="{{ asset('') }}/asset/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="{{ asset('') }}/asset/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="{{ asset('') }}/asset/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="{{ asset('') }}/asset/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
@@ -2177,8 +1907,7 @@
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('/asset/js/script.js') }}"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
