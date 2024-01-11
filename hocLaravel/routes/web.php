@@ -22,13 +22,17 @@ use Illuminate\Http\Request;
 Route::get('/', [ProductController::class,'index'])->name('products');
 
 //route them categories
-Route::post('/addcategory',[ProductController::class,'AddCategories'])->name('AddCategory');
+Route::post('/addcategory',[ProductController::class,'addCategories'])->name('AddCategory');
+
+//route sua categories
+Route::post('/editcategory',[ProductController::class,'editCategories'])->name('editCategory');
+
 
 //route lay du lieu categories
-Route::get('/Categories', [ProductController::class,'showCategories']);
+Route::get('/select-categories', [ProductController::class,'showCategories']);
 
 //route view catigori
-Route::get('/danhmuc', [ProductController::class,'Categories'])->name('Categories');
+Route::get('/categories', [ProductController::class,'Categories'])->name('Categories');
 
 //route them product
 Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addProduct');

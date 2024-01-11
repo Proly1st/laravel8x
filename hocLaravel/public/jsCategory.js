@@ -7,62 +7,85 @@
 $(function(){
     axios({
         'method':'GET',
-        'url':'Categories'
+        'url':'select-categories'
     })
     .then(function(response) {
-      
         if(response.status ===200){
-            let catigoreis = response.data;
-            catigoreis.data.forEach( function(cate) {
-                let id= $('<td>'+ cate.id +'</td>');
-                let name = $('<td>'+ cate.name +'</td>');
-                let description = $('<td>'+cate.description +'</td>');
-              let status;
-                switch(cate.status){
-                    case '1': 
-                        status =$('<td>Đang hoạt động</td>');
+            let data='';
+            for(const cate of response.data.data){
+                let status = '';
+                switch (cate.status) {
+                    case '1':
+                        status = '<td>Đang hoạt động</td>';
                         break;
                     case '0':
-                        status =$('<td>Tạm ngưng</td>');
-
+                        status = '<td>Tạm ngưng</td>';
                         break;
-                    case '-1':
-                        status =$('<td>Đã bị xóa</td>');
-
+                    default:
+                        status = '<td>Dừng hoạt động</td>';
                         break;
                 }
+                data+=`<tr><td> ${cate.id} </td>
+                        <td>${cate.name}</td>
+                        <td>${cate.description}</td>
+                        ${status}
+                        <td><button class="updCategory icon-button button-spacing" title="Sửa" onclick="updateCategory()" data-name="${cate.name}" data-desript ="${cate.description}"><i class="fas fa-edit"></i></button>
+                        <span> </span>
+                        <button class="icon-button button-spacing" title="Xóa" onclick="deleteCategory()"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>`;
                
-                let actions = $('<td></td>');
-                let editButton = $('<button class="icon-button button-spacing" title="Sửa" ><i class="fas fa-edit"></i></button>');
-                editButton.on('click',function(){
-                    console.log('edit hàng');
-                })
-                actions.append(editButton);
-
-                actions.append($('<span> </span>'));
-                let deleteButton = $('<button class="icon-button button-spacing" title="Xóa"><i class="fas fa-trash-alt"></i></button>');
-                deleteButton.on('click',function(){
-                    console.log('xoa hàng');
-                })
-                actions.append(deleteButton);
-
-                let newRow=$('<tr></tr>');
-                newRow.append(id);
-                newRow.append(name);
-                newRow.append(description);
-                newRow.append(status);
-                newRow.append(actions);
-                $('#example-2').append(newRow);
-
-            });
+              
+            }
+            $('#example-2').append(data);
+            
         }else {
-            // console.log(response.message);
+            console.log(response.message);
             console.log('lỗi');
         }
 
     })
     
 })
+
+function updateCategory() {
+    document.getElementById("modal-container").style.display = "block";
+    
+}
+
+function hideModal() {
+    document.getElementById("modal-container").style.display = "none";
+}
+
+$(function(){
+    $('#saveEdit').on('click',function(){
+        let id = $('.updCategory') 
+        axios({
+            'method':'POST',
+            'url':'editcategory',
+            'data': {
+                nameCategory : $('#editName').val() ,
+                decript :$('#editDecript').val() ,
+                statuss :$('#editStatus').val()
+            }
+        }).then(function(res){
+            console.log(res);
+            new PNotify({
+                        title: 'Thông báo thành công',
+                        text: 'Danh mục đã được sữa thành công!',
+                        icon: 'icofont icofont-info-circle',
+                        type: 'success'
+                    });
+            setTimeout(function() {
+                window.location.href = "/categories";
+              }, 3000);
+           
+        })
+    })
+})
+
+function deleteCategory(){
+    console.log('Xóa');
+}
 
 // ? tìm hiểu folder database, và controller model, cái seeder
 // dùng để làm j ( model , migratió, seeders)
@@ -75,17 +98,17 @@ $(function(){
          let statuss = $('#statuss').val();
      
          $('.md-modal').removeClass('md-show');
-         
+       
          axios({
             'method':'POST',
-            'url':'addCategory',
+            'url':'addcategory',
             'data': {
                 nameCategory :name ,
                 decript :decript ,
                 statuss :statuss
             }
         }).then(function(res){
-            
+            console.log(res);
             new PNotify({
                         title: 'Thông báo thành công',
                         text: 'Danh mục đã được thêm mới thành công!',
@@ -93,7 +116,7 @@ $(function(){
                         type: 'success'
                     });
             setTimeout(function() {
-                window.location.href = "/Categories";
+                window.location.href = "/categories";
               }, 3000);
            
         })

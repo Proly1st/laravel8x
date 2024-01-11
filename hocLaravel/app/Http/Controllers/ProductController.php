@@ -16,15 +16,10 @@ class ProductController extends Controller
   
     public function index(){
         
-        $categories = DB::table('categories')->orderByDesc('created_at')->get();
-        $products = DB::table('products')->orderByDesc('created_at')->get();
         
         return view('products');
     }
 
-    public function Product(){
-        return view('products');
-    }
 
     public function  Categories(){
         return view('categories');
@@ -32,23 +27,69 @@ class ProductController extends Controller
 
     
     // ham them category
-    public function AddCategories(Request $request){
-        $nameCategory = $request -> get('nameCategory');
-        $decript = $request -> get('decript');
-        $statuss = $request -> get('statuss');
+    public function addCategories(Request $request){
+        try {
+            $cate = new Categories;
+            $cate->name = $request -> get('nameCategory'); 
+            $cate->description= $request -> get('decript');
+            $cate->status = $request -> get('statuss');
+            $cate->created_at =NOW();
+            $cate->updated_at =NOW();
 
+             $cate->save();
+            $response=[
+                'message'=>200,
+                'status'=>'success',
+                'data'=>$request,
+            ];
 
-        $query = " INSERT INTO categories (name, description, status,created_at, updated_at)
-        VALUES (?, ?,?, NOW(), NOW()) ";
+        return $response;
 
-        DB::insert($query, [$nameCategory, $decript ,$statuss]);
-        return 'Category added successfully!';
+        }catch(Exception $ex){
+            $response =[
+                'status' => 500,
+                'message' => $ex->getMessage(),
+                'data' => null,
+            ];
+            return $response;
+        }
+ 
     }
-    
+
+    // ham sửa categories
+    public function editCategories(Request $request){
+        try {
+            $cate = new Categories;
+            $cate->name = $request -> get('nameCategory'); 
+            $cate->description= $request -> get('decript');
+            $cate->status = $request -> get('statuss');
+            $cate->created_at =NOW();
+            $cate->updated_at =NOW();
+
+            $cate->save();
+            $response=[
+                'message'=>200,
+                'status'=>'success',
+                'data'=>$request,
+            ];
+
+        return $response;
+
+        }catch(Exception $ex){
+            $response =[
+                'status' => 500,
+                'message' => $ex->getMessage(),
+                'data' => null,
+            ];
+            return $response;
+        }
+ 
+    }
+
     // hàm trả về category
     public function showCategories(){
         try{
-        $categories = Categories::orderByDesc('created_at')->get();
+        $categories = Categories::orderByDesc('id')->get();
        //cau truc tra ve
         $response = [
             'status' => 200,
@@ -76,7 +117,7 @@ class ProductController extends Controller
     // ham show product
     public function showProduct(){
         try{
-            $product = Product::orderByDesc('created_at')->get();
+            $product = Product::orderByDesc('id')->get();
             $response =[
                 'status'=> 200,
                 'message'=>'success',

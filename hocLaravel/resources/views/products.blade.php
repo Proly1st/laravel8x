@@ -129,7 +129,6 @@
                                         <div class="input-group">
                                         <input id="imageFile" type="file" class="form-control" accept="image/*" name="image">
                                         </div>
-                                        
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
                                             <input id="name-product" type="text" class="form-control pname" placeholder="Prodcut Name">
@@ -159,8 +158,7 @@
                                         
                                             <select id="select-category" class="form-control stock">
                                                 <option value="">---- Categories ----</option>
-                                                
-                                                <option value=""></option>
+                                               
                                                 
                                             </select>
                                                     
@@ -176,6 +174,8 @@
                             </div>
                             <div class="md-overlay"></div>
                             <!-- Add Contact Ends Model end-->
+                            
+
                         </div>
                         <!-- Page body end -->
                     </div>
