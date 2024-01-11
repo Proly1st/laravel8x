@@ -16,7 +16,26 @@ use Illuminate\Http\Request;
 |
 */
 
- Route::get('/', [ProductController::class,'index']);
+
+
+//route index
+Route::get('/', [ProductController::class,'index'])->name('products');
+
+//route them categories
+Route::post('/addcategory',[ProductController::class,'AddCategories'])->name('AddCategory');
+
+//route lay du lieu categories
+Route::get('/Categories', [ProductController::class,'showCategories']);
+
+//route view catigori
+Route::get('/danhmuc', [ProductController::class,'Categories'])->name('Categories');
+
+//route them product
+Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addProduct');
+
+// route lấy dữ liệu product
+Route::get('/showproduct',[ProductController::class,'showProduct']);
+
 
 //  Route::post('/xuLyRandom', [HomeController::class,'Random'] );
 
@@ -35,16 +54,5 @@ use Illuminate\Http\Request;
 //  Route::post ('/soNguyenTo',[HomeController::class,'SoNguyenTo']);
 
 //  Route::post ('/phanTuLe',[HomeController::class, 'PhanTuLe']);
-
  
-Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);
-
-Route::get('/', [ProductController::class,'index'])->name('products');
-
-
-Route::post('/AddCategory',[ProductController::class,'AddCategories'])->name('AddCategory');
-
-Route::get('/Categories', [ProductController::class,'showCategories'])->name('categories');
-
-Route::post('/addProduct',[ProductController::class,'AddProduct'])->name('addProduct');
-
+// Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);

@@ -13,7 +13,7 @@
 				$('.jFiler-items').css('display','none');
 				$('.stock').val('');
 				$('.pamount').val('');
-				$("#modal-13").modal('hide');
+			
 	
 			});
         $(".close_btn").on("click", function() {
