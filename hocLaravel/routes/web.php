@@ -39,6 +39,12 @@ Route::get('/categories', [ProductController::class,'Categories'])->name('Catego
 //route them product
 Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addProduct');
 
+//route update product
+Route::post('/updateproduct',[ProductController::class,'updateProduct'])->name('update-product');
+
+// route xoa product
+Route::post('/deleteproduct',[ProductController::class,'deleteProduct']);
+
 // route lấy dữ liệu product
 Route::get('/showproduct',[ProductController::class,'showProduct']);
 

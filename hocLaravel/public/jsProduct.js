@@ -27,8 +27,14 @@ $(function(){
                         <td>${v.promotion}</td>
                         <td>${v.promotion_type}</td>
                         <td class="action-icon">
-                        <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit" onclick="update()"><i class="icofont icofont-ui-edit"></i></a>
-                        <a href="#!" class="text-muted delete-btn" data-toggle="tooltip" data-placement="top" title="Delete" onclick="delete()"><i class="icofont icofont-delete-alt"></i></a>
+                        <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit" onclick="updateProduct(this)" 
+                        data-id="${v.id}",
+                        data-name="${v.name}",
+                        data-inventory="${v.inventory}",
+                        data-description="${v.description}",
+                        data-status="${v.status}",
+                        data-price="${v.price}"><i class="icofont icofont-ui-edit"></i></a>
+                        <a href="#!" class="text-muted delete-btn" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteProduct(this)" data-id="${v.id}"><i class="icofont icofont-delete-alt"></i></a>
                      </td></tr>`;
 
             }
@@ -52,6 +58,7 @@ $(function(){
                     data+=`<option value="${v.id}">${v.name}</option>`
             }
             $('#select-category').append(data);
+            $('#select-category-edit').append(data);
         }else{
             
             console.log(response.data.message);
@@ -60,6 +67,112 @@ $(function(){
     
 })
 
+let id_product;
+// hàm sửa sản phẩm
+function updateProduct(button){
+    document.getElementById("modal-container").style.display = "block";
+    id_product = button.getAttribute("data-id");
+    $('#editname-product').val(button.getAttribute("data-name"));
+    $('#editinventory-product').val(button.getAttribute("data-inventory"));
+    $('#editdescript-product').val(button.getAttribute("data-description"));
+    $('#editselect-status').val(button.getAttribute("data-status"));
+    $('#editprice-product').val(button.getAttribute("data-price"));
+   
+}
+
+// hàm sửa khi click vào nút save
+$(function(){
+    $('#saveEdit').on('click',function(){
+        axios({
+            'method':'POST',
+            'url':'updateproduct',
+            'data': {
+                id : id_product,
+                name:  $('#editname-product').val(),
+                inventory : $('#editinventory-product').val() ,
+                description : $('#editdescript-product').val() ,
+                // image : $("#editImageFile").prop("files")[0],
+                status : $('#editselect-status').val(),
+                price : $('#editprice-product').val(),
+                
+            }
+        }).then(function(res){
+            if(res.data.status===200){
+                 document.getElementById("modal-container").style.display = "none";
+                new PNotify({
+                        title: 'Thông báo thành công',
+                        text: 'Sản phẩm đã được sữa thành công!',
+                        icon: 'icofont icofont-info-circle',
+                        type: 'success'
+                    });
+                console.log(res.data.message);    
+            setTimeout(function() {
+                window.location.href = "/";
+              }, 5000);
+            }else{
+                console.log(res.data.message);
+            }
+        })
+    })
+})
+
+function hideModal() {
+    document.getElementById("modal-container").style.display = "none";
+}
+
+// hàm xóa sản phẩm theo id
+function deleteProduct (button){
+    Swal.fire({
+        title: 'Bạn có chắc chắn muốn xóa không?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ',
+        reverseButtons: true,
+        position: 'center',
+        }).then((result) => {
+        if (result.isConfirmed) {
+            axios({
+                'method':'POST',
+                'url':'/deleteproduct',
+                'data':{
+                    id : button.getAttribute("data-id")
+                }
+                
+            }).then(function(res){
+                if(res.data.status ===200){
+                    new PNotify({
+                        title: 'Thông báo thành công',
+                        text: 'Sản phẩm đã được xóa thành công!',
+                        icon: 'icofont icofont-info-circle',
+                        type: 'success'
+                    
+                });
+                console.log(res.data.message);
+                console.log(res.data.status);
+
+                setTimeout(function() {
+                window.location.href = "/";
+                }, 5000);
+                }else if(res.data.status ===500){
+                    new PNotify({
+                        title: 'Thông báo thất bại',
+                        text: res.data.message,
+                        icon: 'icofont icofont-info-circle',
+                        type: 'error'
+                    
+                });
+                    console.log(res.data.message);
+                }
+            })
+
+           
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Hủy bỏ xóa
+            console.log("Hủy bỏ xóa");
+        }
+        });
+}
 // hàm thêm mới sản phẩm
 $(function(){
     $('#save-product').on('click',function(){
@@ -81,8 +194,8 @@ $(function(){
             })
             .then(function(response) {
                 // Xử lý phản hồi từ máy chủ sau khi tệp tin được tải lên thành công
-                if(response.data.data ){
-                    
+                if(response.data.status ===200 ){
+                    console.log(response.data.message);
                     new PNotify({
                         title: 'Thông báo thành công',
                         text: 'Sản phẩm đã được thêm mới thành công!',
@@ -93,20 +206,19 @@ $(function(){
                     setTimeout(function() {
                         window.location.href = "/";
                       }, 5000);
-                }
-              
-            })
-            .catch(function(error) {
-                // Xử lý lỗi (nếu có)
-                console.log(error);
-
-                new PNotify({
+                }else{
+                    console.log(response.data.message);
+                    new PNotify({
                     title: 'Thông báo thất bại',
                     text: 'Thêm mới thất bại',
                     icon: 'icofont icofont-info-circle',
                     type: 'error'
                 });
-            });
+                }
+                
+              
+            })
+          
             
     })
 

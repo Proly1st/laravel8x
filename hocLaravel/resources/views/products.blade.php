@@ -36,6 +36,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.brighttheme.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/pages/pnotify/notify.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -174,7 +176,49 @@
                             </div>
                             <div class="md-overlay"></div>
                             <!-- Add Contact Ends Model end-->
-                            
+                            <!-- start modal update product -->
+                                
+                                <div id="modal-container" class="modal">
+                                    <div class="md-content">
+                                        <h3 class="f-26">Edit Category</h3>
+                                        <div>
+                                            <!-- <div class="input-group">
+                                            <input id="editImageFile" type="file" class="form-control" accept="image/*" name="image">
+                                            </div> -->
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Name</i></span>
+                                                <input id="editname-product" type="text" class="form-control pname" placeholder="Prodcut Name">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Inventory</span>
+                                                <input id="editinventory-product" type="text" class="form-control pamount" placeholder="Inventory">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Description</i></span>
+                                                <input id="editdescript-product" type="text" class="form-control pamount" placeholder="Description">
+                                            </div>
+                                            
+                                            <div class="input-group">
+                                                <select id="editselect-status" class="form-control stock">
+                                                    <option value="">---- Status ----</option>
+                                                    <option value="0">Tạm ngưng</option>
+                                                    <option value="1">Đang hoạt động</option>
+                                                    <option value="-1">Đã bị xóa</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Price</span>
+                                                <input id="editprice-product" type="text" class="form-control pamount" placeholder="Price">
+                                            </div>
+                                           
+                                            <div class="text-center">
+                                                <button id="saveEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                <button id="loseEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn"  onclick="hideModal()">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- end modal update product-->
 
                         </div>
                         <!-- Page body end -->
@@ -211,6 +255,9 @@
     <script type="text/javascript" src="{{ asset('/bower_components/i18next/js/i18next.min.js') }}"></script>
     <script src="{{ asset('asset/js/pcoded.min.js') }}"></script>
     <script src="{{ asset('asset/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('/asset/js/script.js') }}"></script>
 

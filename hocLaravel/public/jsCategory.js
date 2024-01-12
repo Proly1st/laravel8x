@@ -125,7 +125,14 @@ function deleteCategory(button){
                 setTimeout(function() {
                 window.location.href = "/categories";
                 }, 5000);
-                }else{
+                }else if(res.data.status ===500){
+                    new PNotify({
+                        title: 'Thông báo thất bại',
+                        text: res.data.message,
+                        icon: 'icofont icofont-info-circle',
+                        type: 'error'
+                    
+                });
                     console.log(res.data.message);
                 }
             })

@@ -134,8 +134,6 @@ class ProductController extends Controller
        return $response;
     }
 
-
-
     // hàm trả về category
     public function showCategories(){
         try{
@@ -186,32 +184,112 @@ class ProductController extends Controller
 
     }
 
+    // ham sua product
+    public function updateProduct(Request $request){
+        try{
+            $product = Product::findOrFail($request->get('id'));
+            $product->name = $request -> get('name'); 
+            $product->inventory = $request -> get('inventory'); 
+            $product->description= $request -> get('description');
+            $product->status = $request -> get('status');
+            $product->price = $request -> get('price');
+            
+            $product->save();
+            $response=[
+                'status'=>200,
+                'message'=>'update success',
+                'data'=>null
+            ];
+        }catch(Exception $ex){
+            $response=[
+                'status'=>500,
+                'message'=> $ex->getMessage(),
+                'data'=>null
+            ];
+        }
+        return $response;
+    }
+
     // ham them product
     public function AddProduct(Request $request){
-       
-        if ($request->hasFile('image')) {
-            $product = new Product();
+       try{
+            if ($request->hasFile('image')) {
+                $product = new Product();
 
-            $image = $request->file('image')->store('public/images');
-            $product->image  = Storage::url($image);
-            $product->name = $request->get('name');
-            $product->category_id = $request->get('id_category');
-            $product->inventory = $request->get('inventory');
-            $product->description = $request->get('description');
-            $product->status = $request->get('status');
-            $product->price = $request->get('price');
-            $product->promotion = '1';
-            $product->promotion_type = 'khuyến mãi';
-            $product->created_at = NOW();
-            $product->updated_at = NOW();
-            $product->save();
-            return true;
-        } else {
-            return false;
+                $image = $request->file('image')->store('public/images');
+                $product->image  = Storage::url($image);
+                $product->name = $request->get('name');
+                $product->category_id = $request->get('id_category');
+                $product->inventory = $request->get('inventory');
+                $product->description = $request->get('description');
+                $product->status = $request->get('status');
+                $product->price = $request->get('price');
+                $product->promotion = '1';
+                $product->promotion_type = 'khuyến mãi';
+                $product->created_at = NOW();
+                $product->updated_at = NOW();
+                $product->save();
+                $response =[
+                    'status'=>200,
+                    'message'=>'Successfull',
+                    'data'=>$request->all(),
 
-        }
-    
+                ];
+            } else {
+                $response =[
+                    'status'=>500,
+                    'message'=>'error',
+                    'data'=>null
+
+                ];
+            }
+       }catch(Exception $ex){
+        $response =[
+            'status'=>500,
+            'message'=>$ex->getMessage(),
+            'data'=>null
+        ];
+       }
+        
+    return $response;
 
     }
 
+
+    // ham xóa product
+    public function deleteProduct( Request $request){
+        try{
+            
+            // Kiểm tra xem product có tồn tại không
+            
+            $product = Product::find( $request->get('id'));
+            if (!$product) {
+            // product không tồn tại, xử lý và trả về thông báo lỗi
+                $response=[
+                    'status'=>500,
+                    'message'=> 'id does not exits',
+                    'data'=>null
+                ];
+            
+            }else{  
+                    // Xóa category
+                    $product->delete();
+                    $response=[
+                        'status'=>200,
+                        'message'=>'delete success',
+                        'data'=>null
+                    ];
+                }
+
+        }catch(Exception $ex){
+            $response=[
+                'status'=>500,
+                'message'=> $ex->getMessage(),
+                'data'=>null
+            ];
+        
+        }
+    
+    return $response;
+    }
 }

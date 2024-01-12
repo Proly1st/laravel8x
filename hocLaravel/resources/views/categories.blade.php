@@ -141,33 +141,33 @@
                                         <!-- start modal update -->
                                       
 
-                                        <div id="modal-container" class="modal">
-                                            <div class="md-content">
-                                                    <h3 class="f-26">Edit Category</h3>
-                                                    <div>
-                                                        <div class="input-group">
-                                                        <span class="input-group-addon">Name Category</span>
-                                                            <input id="editName" type="text" class="form-control pname" placeholder="">
+                                            <div id="modal-container" class="modal">
+                                                <div class="md-content">
+                                                        <h3 class="f-26">Edit Category</h3>
+                                                        <div>
+                                                            <div class="input-group">
+                                                            <span class="input-group-addon">Name Category</span>
+                                                                <input id="editName" type="text" class="form-control pname" placeholder="">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">Description</span>
+                                                                <input id="editDecript" type="text" class="form-control pname" placeholder="">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <select id="editStatus" class="form-control stock">
+                                                                    <option value="">---- Select Status ----</option>
+                                                                    <option value="1">Đang hoạt động</option>
+                                                                    <option value="0">Tạm ngưng</option>
+                                                                    <option value="-1">Đã bị xóa</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <button id="saveEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
+                                                                <button id="loseEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn"  onclick="hideModal()">Close</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">Description</span>
-                                                            <input id="editDecript" type="text" class="form-control pname" placeholder="">
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <select id="editStatus" class="form-control stock">
-                                                                <option value="">---- Select Status ----</option>
-                                                                <option value="1">Đang hoạt động</option>
-                                                                <option value="0">Tạm ngưng</option>
-                                                                <option value="-1">Đã bị xóa</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <button id="saveEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
-                                                            <button id="loseEdit" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn"  onclick="hideModal()">Close</button>
-                                                        </div>
-                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
                                         <!-- end modal update -->
 
                                     </div>
