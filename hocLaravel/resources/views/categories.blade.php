@@ -41,7 +41,7 @@
     <link href="{{ asset('/asset/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('/asset/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css" rel="stylesheet">
    
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -114,10 +114,11 @@
                                                     <h3 class="f-26">Add Category</h3>
                                                     <div>
                                                         <div class="input-group">
+                                                        <span class="input-group-addon">Name Category</span>
                                                             <input id="CategoryName" type="text" class="form-control pname" placeholder="Category Name">
                                                         </div>
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                                        <span class="input-group-addon">Description</span>
                                                             <input id="decript" type="text" class="form-control pname" placeholder="Description">
                                                         </div>
                                                         <div class="input-group">
@@ -145,10 +146,11 @@
                                                     <h3 class="f-26">Edit Category</h3>
                                                     <div>
                                                         <div class="input-group">
+                                                        <span class="input-group-addon">Name Category</span>
                                                             <input id="editName" type="text" class="form-control pname" placeholder="">
                                                         </div>
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                                            <span class="input-group-addon">Description</span>
                                                             <input id="editDecript" type="text" class="form-control pname" placeholder="">
                                                         </div>
                                                         <div class="input-group">
@@ -215,7 +217,7 @@
     <!-- product list js -->
     <script type="text/javascript" src="{{ asset('/asset/pages/product-list/product-list.js') }}"></script>
    
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
     <!--  -->
  
 <!-- Custom js -->

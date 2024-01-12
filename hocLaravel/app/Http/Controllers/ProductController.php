@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\JsonResponse;
 class ProductController extends Controller
 {
   
@@ -59,7 +59,7 @@ class ProductController extends Controller
     // ham sửa categories
     public function editCategories(Request $request){
         try {
-            $cate = new Categories;
+            $cate =  Categories::findOrFail($request->get('cateID'));
             $cate->name = $request -> get('nameCategory'); 
             $cate->description= $request -> get('decript');
             $cate->status = $request -> get('statuss');
@@ -85,6 +85,56 @@ class ProductController extends Controller
         }
  
     }
+
+    // hàm xóa categories
+    public function deleteCategories( Request $request){
+        try{
+             
+             // Kiểm tra xem category có tồn tại không
+            $categoryId = $request->get('cateID');
+            $category = Categories::find($categoryId);
+            if (!$category) {
+            // Category không tồn tại, xử lý và trả về thông báo lỗi
+                $response=[
+                    'status'=>500,
+                    'message'=> 'id does not exits',
+                    'data'=>null
+                ];
+             
+            }else{
+                $hasProducts = Product::where('category_id', $categoryId)->exists();
+                if ($hasProducts) {
+                // Có sản phẩm sử dụng category này, xử lý và trả về thông báo lỗi
+                    $response=[
+                        'status'=>500,
+                        'message'=> 'Không thể xóa category vì có sản phẩm sử dụng nó',
+                        'data'=>null
+                    ];
+                }else{  
+                    // Xóa category
+                    $category->delete();
+                    $response=[
+                        'status'=>200,
+                        'message'=>'delete success',
+                        'data'=>null
+                    ];
+                }
+
+            }   
+            
+        }catch(Exception $ex){
+            $response=[
+                'status'=>500,
+                'message'=> $ex->getMessage(),
+                'data'=>null
+            ];
+        
+        }
+      
+       return $response;
+    }
+
+
 
     // hàm trả về category
     public function showCategories(){

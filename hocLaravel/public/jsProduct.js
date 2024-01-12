@@ -35,7 +35,7 @@ $(function(){
             $('#e-product-list').append(data);
 
         }else{
-            console.log(response.message);
+            console.log(response.data.message);
         }
  
     })
@@ -46,7 +46,7 @@ $(function(){
         'method':'GET',
         'url':'select-categories',
     }).then(function(response){
-        if(response.status===200){
+        if(response.data.status===200){
             let data='';
             for(const v of response.data.data){
                     data+=`<option value="${v.id}">${v.name}</option>`
@@ -54,7 +54,7 @@ $(function(){
             $('#select-category').append(data);
         }else{
             
-            console.log(response.message);
+            console.log(response.data.message);
         }
     })
     
@@ -81,7 +81,7 @@ $(function(){
             })
             .then(function(response) {
                 // Xử lý phản hồi từ máy chủ sau khi tệp tin được tải lên thành công
-                if(response.data ){
+                if(response.data.data ){
                     
                     new PNotify({
                         title: 'Thông báo thành công',
@@ -92,7 +92,7 @@ $(function(){
 
                     setTimeout(function() {
                         window.location.href = "/";
-                      }, 3000);
+                      }, 5000);
                 }
               
             })

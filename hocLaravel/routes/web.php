@@ -27,6 +27,8 @@ Route::post('/addcategory',[ProductController::class,'addCategories'])->name('Ad
 //route sua categories
 Route::post('/editcategory',[ProductController::class,'editCategories'])->name('editCategory');
 
+// route xoa categories
+Route::post('/deletecategory',[ProductController::class,'deleteCategories']);
 
 //route lay du lieu categories
 Route::get('/select-categories', [ProductController::class,'showCategories']);
@@ -39,6 +41,19 @@ Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addPro
 
 // route lấy dữ liệu product
 Route::get('/showproduct',[ProductController::class,'showProduct']);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //  Route::post('/xuLyRandom', [HomeController::class,'Random'] );
