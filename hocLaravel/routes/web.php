@@ -36,6 +36,10 @@ Route::get('/select-categories', [ProductController::class,'showCategories']);
 //route view catigori
 Route::get('/categories', [ProductController::class,'Categories'])->name('Categories');
 
+//route update status catecory
+Route::post('/update-status-category',[ProductController::class,'updateStatusCategory']);
+
+
 //route them product
 Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addProduct');
 
@@ -43,7 +47,7 @@ Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addPro
 Route::post('/updateproduct',[ProductController::class,'updateProduct'])->name('update-product');
 
 //route update status product
-Route::post('/updateStatusProduct',[ProductController::class,'updateStatusProduct']);
+Route::post('/updatepstatusproduct',[ProductController::class,'updateStatusProduct']);
 
 // route xoa product
 Route::post('/deleteproduct',[ProductController::class,'deleteProduct']);

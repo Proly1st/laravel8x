@@ -86,6 +86,30 @@ class ProductController extends Controller
  
     }
 
+    
+    // ham sửa status product
+    public function updateStatusCategory(Request $request){
+        try{
+            $category= Categories::findOrFail($request->get('id'));
+            $category->status = $request->get('status');
+
+            $category->save();
+            $response=[
+                'status'=>200,
+                'message'=>'update status category success',
+                'data'=>$request->all()
+            ];
+        }catch (Exception $ex){
+            $response=[
+                'status'=>500,
+                'message'=> $ex->getMessage(),
+                'data'=>null
+            ];
+        }
+        return $response;
+    }
+
+
     // hàm xóa categories
     public function deleteCategories( Request $request){
         try{

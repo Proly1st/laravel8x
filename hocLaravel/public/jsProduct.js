@@ -144,7 +144,7 @@ function statusButtonClick(button){
         if (result.isConfirmed) {
             axios({
                 'method':'POST',
-                'url':'/updateStatusProduct',
+                'url':'/updatepstatusproduct',
                 'data':{
                     id : parseInt(button.getAttribute("data-id")),
                     status : button.getAttribute("data-status")
@@ -159,11 +159,11 @@ function statusButtonClick(button){
                         type: 'success'
                     
                 });
-                console.log(res.data);
+                console.log(res.data.message);
                 
 
                 setTimeout(function() {
-                window.location.href = "/";
+                window.location.href = "/categories";
                 }, 5000);
                 }else if(res.data.status ===500){
                     new PNotify({
