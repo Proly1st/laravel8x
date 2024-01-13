@@ -101,6 +101,7 @@
                                                                     <th>Inventory</th>
                                                                     <th>Description</th>
                                                                     <th>Status</th>
+                                                                    <th>Update Status</th>
                                                                     <th>Price</th>                                                                               <th>Promotion</th>
                                                                     <th>Promotion_type</th>
                                                                     <th>Action</th>

@@ -42,6 +42,9 @@ Route::post('/addproduct',[ProductController::class,'AddProduct'])->name('addPro
 //route update product
 Route::post('/updateproduct',[ProductController::class,'updateProduct'])->name('update-product');
 
+//route update status product
+Route::post('/updateStatusProduct',[ProductController::class,'updateStatusProduct']);
+
 // route xoa product
 Route::post('/deleteproduct',[ProductController::class,'deleteProduct']);
 

@@ -7,12 +7,19 @@ $(function(){
            let data='';
             for(const v of response.data.data){
                 let status = '';
+                let statusID;
+                let statusDescript;
                 switch (v.status) {
                     case '1':
-                        status = '<td>Đang hoạt động</td>';
+                        status = '<td>Đang hoạt động </td> ';
+                        statusID=0;
+                        statusDescript='Tạm ngưng';
                         break;
                     case '0':
-                        status = '<td>Tạm ngưng</td>';
+                        status = '<td>Tạm ngưng </td>';
+                        statusID=1;
+                        statusDescript='Đang hoạt động ';
+                        
                         break;
                     default:
                         status = '<td>Dừng hoạt động</td>';
@@ -23,10 +30,12 @@ $(function(){
                         <td>${v.inventory}</td>
                         <td>${v.description}</td> 
                         ${status}
+                        <td><button class="btn btn-primary" onclick="statusButtonClick(this)" data-id= "${v.id}" data-status="${statusID}" >${statusDescript}</button></td>
                         <td>${v.price}</td>
                         <td>${v.promotion}</td>
                         <td>${v.promotion_type}</td>
                         <td class="action-icon">
+                        
                         <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit" onclick="updateProduct(this)" 
                         data-id="${v.id}",
                         data-name="${v.name}",
@@ -118,6 +127,63 @@ $(function(){
 
 function hideModal() {
     document.getElementById("modal-container").style.display = "none";
+}
+
+// hàm sửa trạng thái status 
+function statusButtonClick(button){
+    
+    Swal.fire({
+        title: 'Bạn có chắc chắn muốn thay đổi trạng thái không?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ',
+        reverseButtons: true,
+        position: 'center',
+        }).then((result) => {
+        if (result.isConfirmed) {
+            axios({
+                'method':'POST',
+                'url':'/updateStatusProduct',
+                'data':{
+                    id : parseInt(button.getAttribute("data-id")),
+                    status : button.getAttribute("data-status")
+                }
+                
+            }).then(function(res){
+                if(res.data.status ===200){
+                    new PNotify({
+                        title: 'Thông báo thành công',
+                        text: 'Sản phẩm đã được sửa thành công!',
+                        icon: 'icofont icofont-info-circle',
+                        type: 'success'
+                    
+                });
+                console.log(res.data);
+                
+
+                setTimeout(function() {
+                window.location.href = "/";
+                }, 5000);
+                }else if(res.data.status ===500){
+                    new PNotify({
+                        title: 'Thông báo thất bại',
+                        text: res.data.message,
+                        icon: 'icofont icofont-info-circle',
+                        type: 'error'
+                    
+                });
+                    console.log(res.data.message);
+                    console.log(parseInt(button.getAttribute("data-id")));
+                }
+            })
+
+           
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Hủy bỏ xóa
+            console.log("Hủy bỏ sửa status");
+        }
+        });
 }
 
 // hàm xóa sản phẩm theo id

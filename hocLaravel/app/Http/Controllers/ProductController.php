@@ -210,6 +210,28 @@ class ProductController extends Controller
         return $response;
     }
 
+    // ham sửa status product
+    public function updateStatusProduct(Request $request){
+        try{
+            $product= Product::findOrFail($request->get('id'));
+            $product->status = $request->get('status');
+
+            $product->save();
+            $response=[
+                'status'=>200,
+                'message'=>'update status product success',
+                'data'=>$request->all()
+            ];
+        }catch (Exception $ex){
+            $response=[
+                'status'=>500,
+                'message'=> $ex->getMessage(),
+                'data'=>null
+            ];
+        }
+        return $response;
+    }
+
     // ham them product
     public function AddProduct(Request $request){
        try{
