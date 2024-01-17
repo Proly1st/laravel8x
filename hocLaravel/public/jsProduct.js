@@ -92,36 +92,51 @@ function updateProduct(button){
 // hàm sửa khi click vào nút save
 $(function(){
     $('#saveEdit').on('click',function(){
-        axios({
-            'method':'POST',
-            'url':'updateproduct',
-            'data': {
-                id : id_product,
-                name:  $('#editname-product').val(),
-                inventory : $('#editinventory-product').val() ,
-                description : $('#editdescript-product').val() ,
-                // image : $("#editImageFile").prop("files")[0],
-                status : $('#editselect-status').val(),
-                price : $('#editprice-product').val(),
-                
-            }
-        }).then(function(res){
-            if(res.data.status===200){
-                 document.getElementById("modal-container").style.display = "none";
-                new PNotify({
-                        title: 'Thông báo thành công',
-                        text: 'Sản phẩm đã được sữa thành công!',
-                        icon: 'icofont icofont-info-circle',
-                        type: 'success'
-                    });
-                console.log(res.data.message);    
-            setTimeout(function() {
-                window.location.href = "/";
-              }, 5000);
-            }else{
-                console.log(res.data.message);
-            }
-        })
+        
+        if(!isValidName($('#editname-product').val())){
+            CustomPNotify('Thông báo lỗi!','Tên sản phẩm không được bỏ trống!','error');
+            
+            return;
+        }else if(!isValidInventory($('#editinventory-product').val())){
+            CustomPNotify('Thông báo lỗi!','Tồn kho phải là số nguyên >=0','error');
+
+            return;
+        } else if(!isValidDescription($('#editdescript-product').val())){
+            CustomPNotify('Thông báo lỗi!','Mô tả sản phẩm phải lớn hơn 10 ký tự ','error');
+            return;
+        }else if(!isValidInventory($('#editprice-product').val())){
+            CustomPNotify('Thông báo lỗi!','Giá phải là số nguyên >=0','error');
+            return;
+        }
+        else{
+            axios({
+                'method':'POST',
+                'url':'updateproduct',
+                'data': {
+                    id : id_product,
+                    name:  $('#editname-product').val(),
+                    inventory : $('#editinventory-product').val() ,
+                    description : $('#editdescript-product').val() ,
+                    status : $('#editselect-status').val(),
+                    price : $('#editprice-product').val(),
+                    
+                }
+            }).then(function(res){
+                if(res.data.status===200){
+                    document.getElementById("modal-container").style.display = "none";
+                    CustomPNotify('Thông báo thành công','Sản phẩm đã được sửa thành công!','success');
+
+                    console.log(res.data.message);    
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 5000);
+                }else{
+                    CustomPNotify('Thông báo thất bại',res.data.message,'error');
+
+                    console.log(res.data.message);
+                }
+            })
+        }
     })
 })
 
@@ -152,27 +167,16 @@ function statusButtonClick(button){
                 
             }).then(function(res){
                 if(res.data.status ===200){
-                    new PNotify({
-                        title: 'Thông báo thành công',
-                        text: 'Sản phẩm đã được sửa thành công!',
-                        icon: 'icofont icofont-info-circle',
-                        type: 'success'
                     
-                });
+                CustomPNotify('Thông báo thành công','Sản phẩm đã được sửa thành công!','success');
                 console.log(res.data.message);
                 
-
                 setTimeout(function() {
                 window.location.href = "/categories";
                 }, 5000);
                 }else if(res.data.status ===500){
-                    new PNotify({
-                        title: 'Thông báo thất bại',
-                        text: res.data.message,
-                        icon: 'icofont icofont-info-circle',
-                        type: 'error'
-                    
-                });
+                    CustomPNotify('Thông báo thất bại',response.data.message,'error');
+
                     console.log(res.data.message);
                     console.log(parseInt(button.getAttribute("data-id")));
                 }
@@ -207,13 +211,9 @@ function deleteProduct (button){
                 
             }).then(function(res){
                 if(res.data.status ===200){
-                    new PNotify({
-                        title: 'Thông báo thành công',
-                        text: 'Sản phẩm đã được xóa thành công!',
-                        icon: 'icofont icofont-info-circle',
-                        type: 'success'
-                    
-                });
+                   
+                CustomPNotify('Thông báo thành công','Sản phẩm đã được xóa thành công!','success');
+
                 console.log(res.data.message);
                 console.log(res.data.status);
 
@@ -221,13 +221,8 @@ function deleteProduct (button){
                 window.location.href = "/";
                 }, 5000);
                 }else if(res.data.status ===500){
-                    new PNotify({
-                        title: 'Thông báo thất bại',
-                        text: res.data.message,
-                        icon: 'icofont icofont-info-circle',
-                        type: 'error'
-                    
-                });
+                    CustomPNotify('Thông báo thất bại',response.data.message,'error');
+
                     console.log(res.data.message);
                 }
             })
@@ -242,50 +237,107 @@ function deleteProduct (button){
 // hàm thêm mới sản phẩm
 $(function(){
     $('#save-product').on('click',function(){
-       
-        let formData = new FormData();
-        formData.append('name', $('#name-product').val());
-        formData.append('id_category', $('#select-category').val());
-        formData.append('inventory', $('#inventory-product').val());
-        formData.append('description', $('#descript-product').val());
-        formData.append('image', $("#imageFile").prop("files")[0]);
-        formData.append('status', $('#select-status').val());
-        formData.append('price', $('#price-product').val());
-       
-        $('.md-modal').removeClass('md-show');
-            axios.post('/addproduct', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(function(response) {
-                // Xử lý phản hồi từ máy chủ sau khi tệp tin được tải lên thành công
-                if(response.data.status ===200 ){
-                    console.log(response.data.message);
-                    new PNotify({
-                        title: 'Thông báo thành công',
-                        text: 'Sản phẩm đã được thêm mới thành công!',
-                        icon: 'icofont icofont-info-circle',
-                        type: 'success'
-                    });
+    
+        
+        if(!isValidName($('#name-product').val())){
+            CustomPNotify('Thông báo lỗi!','Tên sản phẩm không được bỏ trống!','error');
+            return;
+        }else if(!isValidInventory($('#inventory-product').val())){
+            CustomPNotify('Thông báo lỗi!','Tồn kho phải là số nguyên >=0','error');
 
-                    setTimeout(function() {
-                        window.location.href = "/";
-                      }, 5000);
-                }else{
-                    console.log(response.data.message);
-                    new PNotify({
-                    title: 'Thông báo thất bại',
-                    text: 'Thêm mới thất bại',
-                    icon: 'icofont icofont-info-circle',
-                    type: 'error'
-                });
-                }
+            return;
+        } else if(!isValidDescription($('#descript-product').val())){
+            CustomPNotify('Thông báo lỗi!','Mô tả sản phẩm phải lớn hơn 10 ký tự ','error');
+            return;
+        }else if(!isValidInventory($('#price-product').val())){
+            CustomPNotify('Thông báo lỗi!','Giá phải là số nguyên >=0','error');
+            return;
+        }
+        else{
+           
+            let formData = new FormData();
+            formData.append('name', $('#name-product').val());
+            formData.append('id_category', $('#select-category').val());
+            formData.append('inventory', $('#inventory-product').val());
+            formData.append('description', $('#descript-product').val());
+            formData.append('image', $("#imageFile").prop("files")[0]);
+            formData.append('status', $('#select-status').val());
+            formData.append('price', $('#price-product').val());
+            
+            $('.md-modal').removeClass('md-show');
+                axios.post('/addproduct', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function(response) {
+                    // Xử lý phản hồi từ máy chủ sau khi tệp tin được tải lên thành công
+                    if(response.data.status ===200 ){
+                        console.log(response.data.message);
+                        
+                        CustomPNotify('Thông báo thành công','Sản phẩm đã được thêm mới thành công!','success');
+
+                        setTimeout(function() {
+                            window.location.href = "/";
+                        }, 5000);
+                    }else{
+                        console.log(response.data.message);
+                        CustomPNotify('Thông báo thất bại',response.data.message,'error');
+
+                    }
+                    
                 
-              
-            })
-          
+                })
+        }
             
     })
 
 })
+
+
+// hàm custom pnotify
+function CustomPNotify(title, text,type){
+    new PNotify({
+        title: title,
+        text: text,
+        icon: 'icofont icofont-info-circle',
+        type: type
+    });
+}
+
+
+
+function isValidName(name){
+    
+    if(name.length<1){
+        return false;
+    }
+    return true;
+}
+
+function isValidInventory(inventory){
+   
+    if(inventory.length<1  || isNaN(inventory)|| inventory<0) {
+        return false;
+    }
+    return true;
+}
+
+function isValidStatus(status){
+   
+    if(status.length<1 ||  status !="0" && status !="1" && status !="-1"){
+        return false;
+    }
+    return true;
+}
+
+
+
+function isValidDescription(descript){
+  
+    if(descript.length <10  ){
+        return false;
+    }
+    return true;
+}
+

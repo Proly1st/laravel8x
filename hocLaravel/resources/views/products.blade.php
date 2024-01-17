@@ -38,6 +38,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/pages/pnotify/notify.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+
+    <!-- css tự viết -->
+    <link href="{{ asset('asset/styleproduct.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -133,15 +137,15 @@
                                         <input id="imageFile" type="file" class="form-control" accept="image/*" name="image">
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                           
                                             <input id="name-product" type="text" class="form-control pname" placeholder="Prodcut Name">
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                           
                                             <input id="inventory-product" type="text" class="form-control pamount" placeholder="Inventory">
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                          
                                             <input id="descript-product" type="text" class="form-control pamount" placeholder="Description">
                                         </div>
                                         
@@ -154,7 +158,7 @@
                                             </select>
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="icofont icofont-user"></i></span>
+                                           
                                             <input id="price-product" type="text" class="form-control pamount" placeholder="Price">
                                         </div>
                                         <div class="input-group"> 
@@ -179,7 +183,7 @@
                             <!-- Add Contact Ends Model end-->
                             <!-- start modal update product -->
                                 
-                                <div id="modal-container" class="modal">
+                                <div id="modal-container" class="modala">
                                     <div class="md-content">
                                         <h3 class="f-26">Edit Category</h3>
                                         <div>

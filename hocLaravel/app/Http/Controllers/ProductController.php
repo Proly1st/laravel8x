@@ -29,17 +29,29 @@ class ProductController extends Controller
     // ham them category
     public function addCategories(Request $request){
         try {
+            $name = $request -> get('nameCategory');
+            $exitstingCategory = Categories::where('name',$name)->first();
+            if($exitstingCategory){
+                $response = [
+                    'status' => 500,
+                    'message' => 'Tên danh mục đã tồn tại',
+                    'data' => $name
+                ];
+                 return $response;
+
+            }
+
             $cate = new Categories;
-            $cate->name = $request -> get('nameCategory'); 
+            $cate->name = $name;
             $cate->description= $request -> get('decript');
             $cate->status = $request -> get('statuss');
             $cate->created_at =NOW();
             $cate->updated_at =NOW();
 
-             $cate->save();
+            $cate->save();
             $response=[
-                'message'=>200,
-                'status'=>'success',
+                'status'=>200,
+                'message'=>'success',
                 'data'=>$request,
             ];
 
@@ -59,8 +71,21 @@ class ProductController extends Controller
     // ham sửa categories
     public function editCategories(Request $request){
         try {
+           
+            $name = $request -> get('nameCategory');
+            $exitstingCategory = Categories::where('name',$name)->first();
+            if($exitstingCategory && $exitstingCategory !== $request->get('cateID')  ){
+                $response = [
+                    'status' => 500,
+                    'message' => 'Tên danh mục đã tồn tại',
+                    'data' => $name
+                ];
+                 return $response;
+
+            }
+
             $cate =  Categories::findOrFail($request->get('cateID'));
-            $cate->name = $request -> get('nameCategory'); 
+            $cate->name = $name;
             $cate->description= $request -> get('decript');
             $cate->status = $request -> get('statuss');
             $cate->created_at =NOW();
@@ -121,7 +146,7 @@ class ProductController extends Controller
             // Category không tồn tại, xử lý và trả về thông báo lỗi
                 $response=[
                     'status'=>500,
-                    'message'=> 'id does not exits',
+                    'message'=> 'danh mục không tồn tại',
                     'data'=>null
                 ];
              
@@ -211,6 +236,17 @@ class ProductController extends Controller
     // ham sua product
     public function updateProduct(Request $request){
         try{
+            $exitstingCategory = Product::where('name',$request -> get('name'))->first();
+            if($exitstingCategory && $exitstingCategory->id != $request->get('id')  ){
+                $response = [
+                    'status' => 500,
+                    'message' => 'Tên sản phẩm đã tồn tại',
+                  
+                    'data' => null
+                ];
+                 return $response;
+
+            }
             $product = Product::findOrFail($request->get('id'));
             $product->name = $request -> get('name'); 
             $product->inventory = $request -> get('inventory'); 
@@ -255,15 +291,25 @@ class ProductController extends Controller
         }
         return $response;
     }
-
+    
     // ham them product
     public function AddProduct(Request $request){
        try{
             if ($request->hasFile('image')) {
+                $exitstingCategory = Product::where('name',$request->get('name'))->first();
+                if($exitstingCategory){
+                    $response = [
+                        'status' => 500,
+                        'message' => 'Tên sản phẩm đã tồn tại',
+                        'data' => null
+                    ];
+                     return $response;
+                }
                 $product = new Product();
 
                 $image = $request->file('image')->store('public/images');
                 $product->image  = Storage::url($image);
+
                 $product->name = $request->get('name');
                 $product->category_id = $request->get('id_category');
                 $product->inventory = $request->get('inventory');
