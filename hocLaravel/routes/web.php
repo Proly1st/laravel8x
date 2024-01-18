@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\CookieController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -62,8 +62,9 @@ Route::get('/showproduct',[ProductController::class,'showProduct']);
 
 
 
+Route::get('/cookies',[CookieController::class,'index']);
 
-
+// Route::get('/getcookies',[CookieController::class,'getCookie']);
 
 
 

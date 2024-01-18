@@ -1,5 +1,8 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^7.8"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.9"
     }
 }
