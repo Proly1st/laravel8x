@@ -14,7 +14,7 @@
     <!-- Favicon icon -->
 
     <link rel="icon" href="{{ asset('asset/images/favicon.ico') }}" type="image/x-icon">
-    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href=" {{ asset('bower_components/bootstrap/css/bootstrap.min.css') }} ">
   
@@ -57,6 +57,7 @@
                                     <div class="d-inline">
                                         <h4>Product List</h4>
                                         <button><a href="{{route('Categories')}}">Categories</a></button>
+                                        <button><a href="{{route('sale')}}">Trang bán hàng</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -114,9 +115,6 @@
                                                             </thead>
                                                             <tbody>
                                                                
-                                                                 
-                                                                
-                                                            
                                                             </tbody>
                                                         </table>
                                                     </div>

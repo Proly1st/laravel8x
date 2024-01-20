@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Trang bán hàng </title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="#">
+    <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="#">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{ asset('asset/images/favicon.ico') }}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('bower_components/bootstrap/css/bootstrap.min.css') }} ">
+
+    <!-- Font awesome star css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Font awesome star css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/jquery-bar-rating/css/fontawesome-stars.css') }}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/icon/themify-icons/themify-icons.css') }}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/icon/icofont/css/icofont.css') }}">
+    <!-- feather Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/icon/feather/css/feather.css') }}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/jquery.mCustomScrollbar.css') }}">
+
+</head>
+
+<body>
+            <!-- Main-body start -->
+            <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- Page-header start -->
+                                <div class="page-header">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-8">
+                                            <div class="page-header-title">
+                                                <div class="d-inline">
+                                                    <h4>Product</h4>
+                                                    <button><a href="{{route('products')}}">Product</a></button>
+                                                    <button><a href="{{route('Categories')}}">Categories</a></button>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index-1.htm"> <i class="feather icon-home"></i> </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">E-Commerce</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Product</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <!-- Product list start -->
+                                        <div class="row" id="sale">
+                                            <!-- <div class="col-xl-2 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="card prod-view">
+                                                    <div class="prod-item text-center">
+                                                        <div class="prod-img">
+                                                            <div class="option-hover">
+                                                                <button type="button" class="btn btn-success btn-icon waves-effect waves-light m-r-15 hvr-bounce-in option-icon">
+                                                                    <i class="icofont icofont-cart-alt f-20"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light m-r-15 hvr-bounce-in option-icon">
+                                                                    <i class="icofont icofont-eye-alt f-20"></i>
+                                                                </button>
+                                                               
+                                                            </div>
+                                                            <a href="#!" class="hvr-shrink">
+                                                                <img src="{{ asset('asset/images/product/p1.jpg') }}" class="img-fluid o-hidden" alt="prod1.jpg"  >
+                                                            </a>
+                                                            <div class="p-new"><a href=""> New </a></div>
+                                                        </div>
+                                                        <div class="prod-info">
+                                                            <a href="#!" class="txt-muted"><h4>Women black Frock</h4></a>
+                                                            <div class="m-b-10">
+                                                                <label class="label label-success">3.5 <i class="fa fa-star"></i></label><a class="text-muted f-w-600">14 Ratings &amp;  3 Reviews</a>
+                                                            </div>
+                                                            <span class="prod-price"><i class="icofont icofont-cur-dollar"></i>1250 <small class="old-price"><i class="icofont icofont-cur-dollar"></i>1850</small></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            
+                                          
+                                        </div>
+                                        <!-- Product list end -->
+                                    </div>
+                                    <!-- Page body end -->
+                                </div>
+                            </div>
+                            <!-- Main-body end -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js tự viết -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script  src="{{asset('jstrangbanhang.js')}}"></script>
+
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/modernizr/js/css-scrollbars.js') }}"></script>
+
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="{{ asset('/bower_components/i18next/js/i18next.min.js') }}"></script>
+    <script src="{{ asset('asset/js/pcoded.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    
+<!-- Custom js -->
+<script type="text/javascript" src="{{ asset('asset/js/script.js') }}"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+
+</html>

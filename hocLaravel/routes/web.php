@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CookieController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TrangBanHangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,15 +57,12 @@ Route::post('/deleteproduct',[ProductController::class,'deleteProduct']);
 Route::get('/showproduct',[ProductController::class,'showProduct']);
 
 
-
-
-
-
-
-
 Route::get('/cookies',[CookieController::class,'index']);
 
-// Route::get('/getcookies',[CookieController::class,'getCookie']);
+Route::get('/sale',[TrangBanHangController::class,'index'])->name('sale');
+
+
+Route::get('/trang-ban-hang',[TrangBanHangController::class,'showProductSale']);
 
 
 

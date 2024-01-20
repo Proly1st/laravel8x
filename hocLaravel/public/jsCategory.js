@@ -101,9 +101,9 @@ $(function(){
 
                 setTimeout(function() {
                     window.location.href = "/categories";
-                }, 5000);
+                }, 2000);
                 }else{
-                    console.log(res.data.message);
+                    console.log(res.data.data);
                     CustomPNotify('Thông báo lỗi!',res.data.message,'error');
                 }
             })
@@ -146,7 +146,7 @@ function statusButtonClick(button){
                     
                     setTimeout(function() {
                     window.location.href = "/categories";
-                    }, 5000);
+                    }, 1500);
                     }else if(res.data.status ===500){
                         CustomPNotify('Thông báo thất bại!', res.data.message,'error');
 
@@ -193,7 +193,7 @@ function deleteCategory(button){
 
                 setTimeout(function() {
                 window.location.href = "/categories";
-                }, 5000);
+                }, 1000);
                 }else if(res.data.status ===500){
                      CustomPNotify('Thông báo thất bại!', res.data.message,'error');
                    
@@ -261,7 +261,7 @@ $(function(){
                 
                 setTimeout(function() {
                     window.location.href = "/categories";
-                }, 5000);
+                }, 1500);
                 }else{
                     console.log(res.data.message);
                     CustomPNotify('Thông báo lỗi!',res.data.message,'error');

@@ -17,7 +17,7 @@ $(function(){
             return cookie.substring(cookieName.length + 1);
             }
         }
-        return null; // Trả về null nếu không tìm thấy cookie
+        return null; 
       }
       
       // Sử dụng hàm để lấy giá trị của cookie

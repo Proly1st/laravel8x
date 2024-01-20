@@ -62,6 +62,7 @@
                                                 <div class="d-inline">
                                                     <h4>Quản lý danh mục sản phẩm</h4>
                                                     <button><a href="{{route('products')}}">Product</a></button>
+                                                    <button><a href="{{route('sale')}}">Trang bán hàng</a></button>
                                                    
                                                 </div>
                                             </div>

@@ -129,7 +129,7 @@ $(function(){
                     console.log(res.data.message);    
                 setTimeout(function() {
                     window.location.href = "/";
-                }, 5000);
+                }, 1500);
                 }else{
                     CustomPNotify('Thông báo thất bại',res.data.message,'error');
 
@@ -172,8 +172,8 @@ function statusButtonClick(button){
                 console.log(res.data.message);
                 
                 setTimeout(function() {
-                window.location.href = "/categories";
-                }, 5000);
+                window.location.href = "/";
+                }, 1500);
                 }else if(res.data.status ===500){
                     CustomPNotify('Thông báo thất bại',response.data.message,'error');
 
@@ -219,7 +219,7 @@ function deleteProduct (button){
 
                 setTimeout(function() {
                 window.location.href = "/";
-                }, 5000);
+                }, 1000);
                 }else if(res.data.status ===500){
                     CustomPNotify('Thông báo thất bại',response.data.message,'error');
 
@@ -279,7 +279,7 @@ $(function(){
 
                         setTimeout(function() {
                             window.location.href = "/";
-                        }, 5000);
+                        }, 1500);
                     }else{
                         console.log(response.data.message);
                         CustomPNotify('Thông báo thất bại',response.data.message,'error');

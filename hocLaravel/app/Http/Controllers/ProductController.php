@@ -93,8 +93,8 @@ class ProductController extends Controller
 
             $cate->save();
             $response=[
-                'message'=>200,
-                'status'=>'success',
+                'status'=>200,
+                'message'=>'success',
                 'data'=>$request,
             ];
 
