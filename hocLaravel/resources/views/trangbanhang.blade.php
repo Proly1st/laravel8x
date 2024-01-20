@@ -30,7 +30,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/jquery.mCustomScrollbar.css') }}">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -70,37 +70,10 @@
                                     <div class="page-body">
                                         <!-- Product list start -->
                                         <div class="row" id="sale">
-                                            <!-- <div class="col-xl-2 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="card prod-view">
-                                                    <div class="prod-item text-center">
-                                                        <div class="prod-img">
-                                                            <div class="option-hover">
-                                                                <button type="button" class="btn btn-success btn-icon waves-effect waves-light m-r-15 hvr-bounce-in option-icon">
-                                                                    <i class="icofont icofont-cart-alt f-20"></i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light m-r-15 hvr-bounce-in option-icon">
-                                                                    <i class="icofont icofont-eye-alt f-20"></i>
-                                                                </button>
-                                                               
-                                                            </div>
-                                                            <a href="#!" class="hvr-shrink">
-                                                                <img src="{{ asset('asset/images/product/p1.jpg') }}" class="img-fluid o-hidden" alt="prod1.jpg"  >
-                                                            </a>
-                                                            <div class="p-new"><a href=""> New </a></div>
-                                                        </div>
-                                                        <div class="prod-info">
-                                                            <a href="#!" class="txt-muted"><h4>Women black Frock</h4></a>
-                                                            <div class="m-b-10">
-                                                                <label class="label label-success">3.5 <i class="fa fa-star"></i></label><a class="text-muted f-w-600">14 Ratings &amp;  3 Reviews</a>
-                                                            </div>
-                                                            <span class="prod-price"><i class="icofont icofont-cur-dollar"></i>1250 <small class="old-price"><i class="icofont icofont-cur-dollar"></i>1850</small></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            
+                                           
                                           
                                         </div>
+                                        <div class="pagination-container"></div>
                                         <!-- Product list end -->
                                     </div>
                                     <!-- Page body end -->
@@ -122,6 +95,8 @@
     
     <script  src="{{asset('jstrangbanhang.js')}}"></script>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
