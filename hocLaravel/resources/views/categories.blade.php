@@ -63,6 +63,7 @@
                                                     <h4>Quản lý danh mục sản phẩm</h4>
                                                     <button><a href="{{route('products')}}">Product</a></button>
                                                     <button><a href="{{route('sale')}}">Trang bán hàng</a></button>
+                                                    <button><a href="{{route('cart')}}">Giỏ hàng</a></button>
                                                    
                                                 </div>
                                             </div>

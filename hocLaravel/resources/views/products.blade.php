@@ -58,6 +58,7 @@
                                         <h4>Product List</h4>
                                         <button><a href="{{route('Categories')}}">Categories</a></button>
                                         <button><a href="{{route('sale')}}">Trang bán hàng</a></button>
+                                        <button><a href="{{route('cart')}}">Giỏ hàng</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -237,8 +238,8 @@
    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('jsProduct.js') }}"></script>
+
     <script type="text/javascript" src=" {{asset('bower_components/pnotify/js/pnotify.js')}}"></script>
-    
     <script type="text/javascript" src="{{asset('asset/pages/pnotify/notify.js ')}}"></script>
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>

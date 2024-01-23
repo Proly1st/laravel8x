@@ -47,7 +47,7 @@ $(function(){
                      </td></tr>`;
 
             }
-            $('#e-product-list').append(data);
+            $('#e-product-list tbody').append(data);
 
         }else{
             console.log(response.data.message);

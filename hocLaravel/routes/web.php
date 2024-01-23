@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CookieController;
+use App\Http\Controllers\ProductCartController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TrangBanHangController;
 /*
@@ -63,6 +64,12 @@ Route::get('/sale',[TrangBanHangController::class,'index'])->name('sale');
 
 
 Route::get('/trang-ban-hang',[TrangBanHangController::class,'showProductSale']);
+
+// route hiển thị giao diên giỏ hàng
+Route::get('/cart',[ProductCartController::class,'index'])->name('cart');
+
+// route lấy dữ liêu giỏ hàng
+Route::get('/showcart',[ProductCartController::class,'showCart']);
 
 
 

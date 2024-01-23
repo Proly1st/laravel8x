@@ -14412,7 +14412,8 @@ body.menu-bottom #collapse-menu {
 .wizard>.content {
     border: 1px solid #ccc;
     border-radius: 2px;
-    background: #fff
+    background: #fff;
+    height: 600px;
 }
 
 .label {

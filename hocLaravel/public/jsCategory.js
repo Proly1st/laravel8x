@@ -43,7 +43,7 @@ $(function(){
                         </tr>`;
                
             }
-            $('#example-2').append(data);
+            $('#example-2 tbody').append(data);
             
         }else {
             console.log(response.data.message);

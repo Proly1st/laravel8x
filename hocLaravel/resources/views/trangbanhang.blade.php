@@ -31,6 +31,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/jquery.mCustomScrollbar.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+     <!-- notify js Fremwork -->
+     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/pnotify/css/pnotify.brighttheme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/pages/pnotify/notify.css') }}">
 </head>
 
 <body>
@@ -46,6 +51,7 @@
                                                     <h4>Product</h4>
                                                     <button><a href="{{route('products')}}">Product</a></button>
                                                     <button><a href="{{route('Categories')}}">Categories</a></button>
+                                                    <button><a href="{{route('cart')}}">Giỏ hàng</a></button>
                                                     
                                                 </div>
                                             </div>
@@ -90,16 +96,16 @@
 
     <!-- js tự viết -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
-    <script  src="{{asset('jstrangbanhang.js')}}"></script>
-
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
+   
+    <script  src="{{asset('jstrangbanhang.js')}}"></script>
+  
+    <script type="text/javascript" src=" {{asset('bower_components/pnotify/js/pnotify.js')}}"></script>
+    <script type="text/javascript" src="{{asset('asset/pages/pnotify/notify.js ')}}"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
     <!-- modernizr js -->
