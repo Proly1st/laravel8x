@@ -1,10 +1,12 @@
 $(function(){
     let cart = $.cookie("cart");
-   
+
     if(cart){
        let cartItems = JSON.parse(cart);
         let keys = Object.keys(cartItems);
-       console.log(keys);
+       if(keys.length==0){
+        return;
+       }
    
         axios.get('showcart', {
           params: {
@@ -13,12 +15,13 @@ $(function(){
         }).then(function(response){
           if(response.data.status===200){
             let data='';
-            let quantity;
+            let quantity=0;
             for(let v of response.data.data){
                quantity= cartItems[v.id].quantity;
+               
               data+=` <tr class="odd">
                           <td class="action-icon text-center">
-                              <input type="checkbox" class="order-checkbox" value="${v.id}">
+                              <input type="checkbox" class="order-checkbox" value="${v.id}" data-quantity="${quantity}" data-price="${v.price}" >
                           </td>
                           <td class="pro-list-img" tabindex="0">
                               <img src="${v.image}" class="img-fluid" alt="tbl">
@@ -30,7 +33,7 @@ $(function(){
                           </td>
                           <td>${v.price*1}</td>
                           <td>
-                              <input type="text" class="soluong form-control" value="${quantity} " data-id="${v.id}">
+                              <input type="text" class="soluong form-control" value="${quantity}" data-id="${v.id}" data-price="${v.price}" >
                           </td>
                           <td>${v.price*quantity}</td>
 
@@ -42,8 +45,6 @@ $(function(){
             }
             $('#e-product-list tbody').append(data);
            
-            console.log(response.data.data);
-            console.log(cartItems);
           }else{
             console.log(response.data.message);
           }
@@ -52,18 +53,18 @@ $(function(){
    
     }
 
-      
-  $(document).on('input paste','.soluong',function(){
+  // hàm xử lý xóa sản phẩm hoặc tổng tiền khi khách hàng thay đổi số lượng    
+  $(document).on('input paste ','.soluong',function(){
 
     let soluong = parseInt($(this).val());
     if(isNaN(soluong)){
       return;
     }
     let idXoa= $(this).data('id');
-    let donGia= $(this).parents('tr').find('td:eq(2)').text();
+    let donGia= $(this).parents('tr').find('td:eq(3)').text();
 
     let thanhTien = donGia*soluong;
-    $(this).parents('tr').find('td:eq(4)').text(thanhTien);
+    $(this).parents('tr').find('td:eq(5)').text(thanhTien);
     let cartItems = JSON.parse($.cookie("cart"));
     
     if(soluong<1){
@@ -99,6 +100,7 @@ $(function(){
   })
 })
 
+// hàm xóa sản phẩm khỏi giỏ hàng
 function deleteCart(button){
   let cartItems = JSON.parse($.cookie('cart'));
   delete cartItems[button.getAttribute('data-id')];
@@ -114,6 +116,80 @@ function deleteCart(button){
     window.location.href = "/cart";
     }, 1000);
 }
+
+// hàm lưu thông tin đơn hàng
+let selectedProducts = [];
+let total_price;
+let quantityProducts;
+$(document).on('click', '.order-checkbox:checked', function() {
+  selectedProducts=[];
+  quantityProducts=0;
+  total_price=0;
+  $('.order-checkbox:checked').each(function() {
+      total_price += parseInt( $(this).parents('tr').find('td:eq(5)').text());
+      quantityProducts+= parseInt( $(this).parents('tr').find('td:eq(4) input').val());
+      selectedProducts.push({
+      id: $(this).val(),
+      quantity: parseInt( $(this).parents('tr').find('td:eq(4) input').val()),
+      price :$(this).data('price'),
+      original_price : $(this).data('price'),
+      total_priceProduct : parseInt( $(this).parents('tr').find('td:eq(5)').text())
+    });
+  });
+ 
+  
+  
+});
+
+$(document).on('click','#submitCart',function(){
+ 
+  console.log(total_price);
+  if(selectedProducts.length ==0){
+    console.log('hàm rỗng');
+    CustomPNotify('Thông báo', 'Vui lòng tích chọn sản phẩm cần đặt','error');
+    return;
+  }else{
+    axios({
+      'method':'POST',
+      'url':'luu-order',
+      'data': {
+        name: $('#name-2').val(),
+        address: $('#address').val(),
+        phone: $('#phone-2').val(),
+        total_price : total_price,
+        quantityProducts :quantityProducts,
+        selectedProducts : selectedProducts
+      }
+    }).then(function(res){
+        if(res.data.status==200){
+          console.log(res.data);
+          CustomPNotify('Thông báo', 'Đặt hàng thành công!','success');
+          // xóa cookie của những sản phẩm đã đặt.
+          let cartItems = JSON.parse($.cookie('cart'));
+          $.each(selectedProducts,(index,product)=>{
+            
+            delete cartItems[product.id];
+            
+          })
+          
+          let expiresDate = new Date();
+          expiresDate.setMonth(expiresDate.getMonth()+3);
+          $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});
+
+        }else{
+          console.log(res.data.message);
+          CustomPNotify('Thông báo', 'Đặt hàng thất bại','error');
+        }
+
+    });
+
+
+    // console.log(selectedProducts);
+
+  }
+
+});
+
 
 // hàm custom pnotify
 function CustomPNotify(title, text,type){

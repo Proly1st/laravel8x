@@ -150,7 +150,7 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
-                                                                <button id="submitCart" type="submit" class="btn btn-primary btn-block">Submit</button>
+                                                                    <button id="submitCart" type="submit" class="btn btn-primary btn-block">Submit</button>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -71,6 +71,9 @@ Route::get('/cart',[ProductCartController::class,'index'])->name('cart');
 // route lấy dữ liêu giỏ hàng
 Route::get('/showcart',[ProductCartController::class,'showCart']);
 
+// route lấy dữ liêu giỏ hàng
+Route::post('/luu-order',[ProductCartController::class,'saveOrder']);
+
 
 
 
