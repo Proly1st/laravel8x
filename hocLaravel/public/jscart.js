@@ -7,7 +7,7 @@ $(function(){
        if(keys.length==0){
         return;
        }
-   
+
         axios.get('showcart', {
           params: {
             productIDs: keys
@@ -18,7 +18,7 @@ $(function(){
             let quantity=0;
             for(let v of response.data.data){
                quantity= cartItems[v.id].quantity;
-               
+
               data+=` <tr class="odd">
                           <td class="action-icon text-center">
                               <input type="checkbox" class="order-checkbox" value="${v.id}" data-quantity="${quantity}" data-price="${v.price}" >
@@ -38,22 +38,22 @@ $(function(){
                           <td>${v.price*quantity}</td>
 
                           <td class="action-icon text-center">
-                              <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top" 
+                              <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
                               data-original-title="Delete" onclick="deleteCart(this)" data-id="${v.id}"><i class="icofont icofont-delete-alt"></i></a>
                           </td>
                       </tr>`
             }
             $('#e-product-list tbody').append(data);
-           
+
           }else{
             console.log(response.data.message);
           }
 
         })
-   
+
     }
 
-  // hàm xử lý xóa sản phẩm hoặc tổng tiền khi khách hàng thay đổi số lượng    
+  // hàm xử lý xóa sản phẩm hoặc tổng tiền khi khách hàng thay đổi số lượng
   $(document).on('input paste ','.soluong',function(){
 
     let soluong = parseInt($(this).val());
@@ -66,7 +66,7 @@ $(function(){
     let thanhTien = donGia*soluong;
     $(this).parents('tr').find('td:eq(5)').text(thanhTien);
     let cartItems = JSON.parse($.cookie("cart"));
-    
+
     if(soluong<1){
       Swal.fire({
         title: 'Bạn có chắc chắn muốn bỏ sản phẩm này không?',
@@ -84,7 +84,7 @@ $(function(){
             let expiresDate = new Date();
             expiresDate.setMonth(expiresDate.getMonth()+3);
             $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});
-           
+
             CustomPNotify('Thông báo thành công', 'Sản phẩm đã được xóa khỏi giỏ hàng','success');
             setTimeout(function() {
               window.location.href = "/cart";
@@ -104,9 +104,9 @@ $(function(){
 function deleteCart(button){
   let cartItems = JSON.parse($.cookie('cart'));
   delete cartItems[button.getAttribute('data-id')];
-  
+
   let expiresDate = new Date();
-  expiresDate.setMonth(expiresDate.getMonth()+3);
+  expiresDate.setMonth(expiwresDate.getMonth()+3);
   $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});
 
   console.log(cartItems);
@@ -136,13 +136,13 @@ $(document).on('click', '.order-checkbox:checked', function() {
       total_priceProduct : parseInt( $(this).parents('tr').find('td:eq(5)').text())
     });
   });
- 
-  
-  
+
+
+
 });
 
 $(document).on('click','#submitCart',function(){
- 
+
   console.log(total_price);
   if(selectedProducts.length ==0){
     console.log('hàm rỗng');
@@ -167,11 +167,11 @@ $(document).on('click','#submitCart',function(){
           // xóa cookie của những sản phẩm đã đặt.
           let cartItems = JSON.parse($.cookie('cart'));
           $.each(selectedProducts,(index,product)=>{
-            
+
             delete cartItems[product.id];
-            
+
           })
-          
+
           let expiresDate = new Date();
           expiresDate.setMonth(expiresDate.getMonth()+3);
           $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});

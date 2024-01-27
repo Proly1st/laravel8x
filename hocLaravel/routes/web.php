@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\ProductCartController;
+use App\Http\Controllers\QuanLyDonHangController;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\TrangBanHangController;
 /*
@@ -76,6 +78,21 @@ Route::post('/luu-order',[ProductCartController::class,'saveOrder']);
 
 
 
+//route view quan ly don hang
+Route::get('/order', [QuanLyDonHangController::class,'index'])->name('quanly-donhang');
+
+
+//route lay du lieu bang order
+Route::get('/select-order', [QuanLyDonHangController::class,'showDonHang']);
+
+
+//route lay du lieu bang order detail
+Route::get('/select-orderDetail', [QuanLyDonHangController::class,'getOrderDetail']);
+
+//route lay du lieu bang order detail
+Route::post('/duyetdonhang', [QuanLyDonHangController::class,'duyetDonHang']);
+
+
 
 
 //  Route::post('/xuLyRandom', [HomeController::class,'Random'] );
@@ -95,5 +112,5 @@ Route::post('/luu-order',[ProductCartController::class,'saveOrder']);
 //  Route::post ('/soNguyenTo',[HomeController::class,'SoNguyenTo']);
 
 //  Route::post ('/phanTuLe',[HomeController::class, 'PhanTuLe']);
- 
+
 // Route::get('/call-client2-api', [HomeController::class, 'callApiClient2']);

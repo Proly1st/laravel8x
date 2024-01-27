@@ -20,7 +20,7 @@ class Order_detail extends Model
         'total_price',
         'note'
     ];
-    
+
     // Định nghĩa quan hệ khóa ngoại với Order
     public function order()
     {
@@ -28,7 +28,7 @@ class Order_detail extends Model
     }
 
     // Định nghĩa quan hệ khóa ngoại với Product
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }

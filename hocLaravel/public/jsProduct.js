@@ -19,24 +19,24 @@ $(function(){
                         status = '<td>Tạm ngưng </td>';
                         statusID=1;
                         statusDescript='Đang hoạt động ';
-                        
+
                         break;
                     default:
                         status = '<td>Dừng hoạt động</td>';
                         break;
                 }
-                data+=`<tr><td><img src="${v.image}" class="img-fluid" alt="tbl"style="width: 72px; height: auto;"></img></td></td>
+                data+=`<tr><td><img src="${v.image}" class="img-fluid" alt="${v.image}" style="width: 72px; height: auto;"></img></td></td>
                         <td>${v.name}</td>
                         <td>${v.inventory}</td>
-                        <td>${v.description}</td> 
+                        <td>${v.description}</td>
                         ${status}
                         <td><button class="btn btn-primary" onclick="statusButtonClick(this)" data-id= "${v.id}" data-status="${statusID}" >${statusDescript}</button></td>
                         <td>${v.price}</td>
                         <td>${v.promotion}</td>
                         <td>${v.promotion_type}</td>
                         <td class="action-icon">
-                        
-                        <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit" onclick="updateProduct(this)" 
+
+                        <a href="#!" class="m-r-15 text-muted edit-btn" data-toggle="tooltip" data-placement="top" title="Edit" onclick="updateProduct(this)"
                         data-id="${v.id}",
                         data-name="${v.name}",
                         data-inventory="${v.inventory}",
@@ -52,7 +52,7 @@ $(function(){
         }else{
             console.log(response.data.message);
         }
- 
+
     })
 })
 // hàm trả về tên danh mục trong phần thêm mới sản phẩm
@@ -69,11 +69,11 @@ $(function(){
             $('#select-category').append(data);
             $('#select-category-edit').append(data);
         }else{
-            
+
             console.log(response.data.message);
         }
     })
-    
+
 })
 
 let id_product;
@@ -86,16 +86,16 @@ function updateProduct(button){
     $('#editdescript-product').val(button.getAttribute("data-description"));
     $('#editselect-status').val(button.getAttribute("data-status"));
     $('#editprice-product').val(button.getAttribute("data-price"));
-   
+
 }
 
 // hàm sửa khi click vào nút save
 $(function(){
     $('#saveEdit').on('click',function(){
-        
+
         if(!isValidName($('#editname-product').val())){
             CustomPNotify('Thông báo lỗi!','Tên sản phẩm không được bỏ trống!','error');
-            
+
             return;
         }else if(!isValidInventory($('#editinventory-product').val())){
             CustomPNotify('Thông báo lỗi!','Tồn kho phải là số nguyên >=0','error');
@@ -119,14 +119,14 @@ $(function(){
                     description : $('#editdescript-product').val() ,
                     status : $('#editselect-status').val(),
                     price : $('#editprice-product').val(),
-                    
+
                 }
             }).then(function(res){
                 if(res.data.status===200){
                     document.getElementById("modal-container").style.display = "none";
                     CustomPNotify('Thông báo thành công','Sản phẩm đã được sửa thành công!','success');
 
-                    console.log(res.data.message);    
+                    console.log(res.data.message);
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 1500);
@@ -136,7 +136,7 @@ $(function(){
                     console.log(res.data.message);
                 }
             })
-            
+
         }
     })
 })
@@ -145,9 +145,9 @@ function hideModal() {
     document.getElementById("modal-container").style.display = "none";
 }
 
-// hàm sửa trạng thái status 
+// hàm sửa trạng thái status
 function statusButtonClick(button){
-    
+
     Swal.fire({
         title: 'Bạn có chắc chắn muốn thay đổi trạng thái không?',
         icon: 'question',
@@ -165,13 +165,13 @@ function statusButtonClick(button){
                     id : parseInt(button.getAttribute("data-id")),
                     status : button.getAttribute("data-status")
                 }
-                
+
             }).then(function(res){
                 if(res.data.status ===200){
-                    
+
                 CustomPNotify('Thông báo thành công','Sản phẩm đã được sửa thành công!','success');
                 console.log(res.data.message);
-                
+
                 setTimeout(function() {
                 window.location.href = "/";
                 }, 1500);
@@ -183,7 +183,7 @@ function statusButtonClick(button){
                 }
             })
 
-           
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // Hủy bỏ xóa
             console.log("Hủy bỏ sửa status");
@@ -209,10 +209,10 @@ function deleteProduct (button){
                 'data':{
                     id : button.getAttribute("data-id")
                 }
-                
+
             }).then(function(res){
                 if(res.data.status ===200){
-                   
+
                 CustomPNotify('Thông báo thành công','Sản phẩm đã được xóa thành công!','success');
 
                 console.log(res.data.message);
@@ -228,7 +228,7 @@ function deleteProduct (button){
                 }
             })
 
-           
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // Hủy bỏ xóa
             console.log("Hủy bỏ xóa");
@@ -238,8 +238,8 @@ function deleteProduct (button){
 // hàm thêm mới sản phẩm
 $(function(){
     $('#save-product').on('click',function(){
-    
-        
+
+
         if(!isValidName($('#name-product').val())){
             CustomPNotify('Thông báo lỗi!','Tên sản phẩm không được bỏ trống!','error');
             return;
@@ -255,7 +255,7 @@ $(function(){
             return;
         }
         else{
-           
+
             let formData = new FormData();
             formData.append('name', $('#name-product').val());
             formData.append('id_category', $('#select-category').val());
@@ -264,7 +264,7 @@ $(function(){
             formData.append('image', $("#imageFile").prop("files")[0]);
             formData.append('status', $('#select-status').val());
             formData.append('price', $('#price-product').val());
-            
+
             $('.md-modal').removeClass('md-show');
                 axios.post('/addproduct', formData, {
                     headers: {
@@ -275,7 +275,7 @@ $(function(){
                     // Xử lý phản hồi từ máy chủ sau khi tệp tin được tải lên thành công
                     if(response.data.status ===200 ){
                         console.log(response.data.message);
-                        
+
                         CustomPNotify('Thông báo thành công','Sản phẩm đã được thêm mới thành công!','success');
 
                         setTimeout(function() {
@@ -286,11 +286,11 @@ $(function(){
                         CustomPNotify('Thông báo thất bại',response.data.message,'error');
 
                     }
-                    
-                
+
+
                 })
         }
-            
+
     })
 
 })
@@ -309,7 +309,7 @@ function CustomPNotify(title, text,type){
 
 
 function isValidName(name){
-    
+
     if(name.length<1){
         return false;
     }
@@ -317,7 +317,7 @@ function isValidName(name){
 }
 
 function isValidInventory(inventory){
-   
+
     if(inventory.length<1  || isNaN(inventory)|| inventory<0) {
         return false;
     }
@@ -325,7 +325,7 @@ function isValidInventory(inventory){
 }
 
 function isValidStatus(status){
-   
+
     if(status.length<1 ||  status !="0" && status !="1" && status !="-1"){
         return false;
     }
@@ -335,7 +335,7 @@ function isValidStatus(status){
 
 
 function isValidDescription(descript){
-  
+
     if(descript.length <10  ){
         return false;
     }

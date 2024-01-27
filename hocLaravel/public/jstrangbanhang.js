@@ -14,7 +14,7 @@ $(function() {
                 const startIndex = (page - 1) * itemsPerPage;
                 const endIndex = startIndex + itemsPerPage;
                 const currentProducts = products.slice(startIndex, endIndex);
-                
+
                 let data = '';
 
                 for (const v of currentProducts) {
@@ -31,7 +31,7 @@ $(function() {
                                                 </button>
                                             </div>
                                             <a href="#!" class="hvr-shrink">
-                                                <img src="${v.image}" class="img-fluid o-hidden" alt="prod1.jpg">
+                                                <img src="${v.image}" class="img-fluid o-hidden" alt="${v.image}">
                                             </a>
                                             <div class="p-new"><a href=""> New </a></div>
                                         </div>
@@ -97,7 +97,7 @@ $(function() {
                 cartItems[productID]={
                     quantity:1
                 };
-       
+
 
             }
         }else{
@@ -106,13 +106,13 @@ $(function() {
                     quantity:1
                 }
             };
-      
+
 
         }
         let expiresDate = new Date();
         expiresDate.setMonth(expiresDate.getMonth()+3);
         $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});
-        
+
         console.log(cartItems);
     }
 
