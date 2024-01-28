@@ -139,13 +139,23 @@ $(function() {
     })
 })
 
+
+// ham xoá dấu tiếng việt
+function removeDiacritics(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "D");
+}
 // hàm xử lý tìm kiếm order
 $('#searchOrder').on('click',function (){
-    let inputSearch=$('#inputSearch').val();
+    let inputSearch = removeDiacritics($('#inputSearch').val()).replace(/ /g, "").toLowerCase();
+    
     if(inputSearch){
         axios({
             'method':'GET',
-            'url':'searchOrder',
+            'url':'search-order',
             params: {
                 inputSearch: inputSearch
             }

@@ -64,6 +64,9 @@ Route::get('/cookies',[CookieController::class,'index']);
 
 Route::get('/sale',[TrangBanHangController::class,'index'])->name('sale');
 
+//route tim kiem du lieu bang products
+Route::get('/search-product', [TrangBanHangController::class,'searchProduct']);
+
 
 Route::get('/trang-ban-hang',[TrangBanHangController::class,'showProductSale']);
 
@@ -90,7 +93,7 @@ Route::get('/select-order', [QuanLyDonHangController::class,'showDonHang']);
 Route::get('/select-orderDetail', [QuanLyDonHangController::class,'getOrderDetail']);
 
 //route tim kiem du lieu bang order
-Route::get('/searchOrder', [QuanLyDonHangController::class,'searchDonHang']);
+Route::get('/search-order', [QuanLyDonHangController::class,'searchDonHang']);
 
 
 

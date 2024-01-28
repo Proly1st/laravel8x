@@ -3,7 +3,7 @@
 
 <head>
     <title>Trang bán hàng </title>
-  
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +52,7 @@
                                                     <button><a href="{{route('products')}}">Product</a></button>
                                                     <button><a href="{{route('Categories')}}">Categories</a></button>
                                                     <button><a href="{{route('cart')}}">Giỏ hàng</a></button>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -74,10 +74,16 @@
                                 <!-- Page-header end -->
                                     <!-- Page body start -->
                                     <div class="page-body">
+                                        <div class="input-group mt-3">
+                                            <input id="inputSearch" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                                            <div class="input-group-append">
+                                                <button id="searchProduct" class="btn btn-primary" type="button">Tìm kiếm</button>
+                                            </div>
+                                        </div>
                                         <!-- Product list start -->
                                         <div class="row" id="sale">
-                                           
-                                          
+
+
                                         </div>
                                         <div class="pagination-container"></div>
                                         <!-- Product list end -->
@@ -86,7 +92,7 @@
                                 </div>
                             </div>
                             <!-- Main-body end -->
-                            
+
                         </div>
                     </div>
                 </div>
@@ -97,13 +103,13 @@
     <!-- js tự viết -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
-   
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
+
     <script  src="{{asset('jstrangbanhang.js')}}"></script>
-  
+
     <script type="text/javascript" src=" {{asset('bower_components/pnotify/js/pnotify.js')}}"></script>
     <script type="text/javascript" src="{{asset('asset/pages/pnotify/notify.js ')}}"></script>
     <!-- jquery slimscroll js -->
@@ -118,7 +124,7 @@
     <script src="{{ asset('asset/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-    
+
 <!-- Custom js -->
 <script type="text/javascript" src="{{ asset('asset/js/script.js') }}"></script>
 
