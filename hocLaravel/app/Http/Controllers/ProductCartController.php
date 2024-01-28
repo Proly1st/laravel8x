@@ -7,6 +7,7 @@ use App\Models\Order_detail;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductCartController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductCartController extends Controller
     }
 
     public function showCart(Request $request){
-        try{ 
+        try{
             $productIDs = $request->input('productIDs');
             $products = Product::whereIn('id', $productIDs)->get();
             $response=[
@@ -23,7 +24,7 @@ class ProductCartController extends Controller
                 'message'=>'Success query products',
                 'data'=> $products
             ];
-            
+
         }catch(Exception $ex){
             $response=[
                 'status'=>500,
@@ -32,17 +33,19 @@ class ProductCartController extends Controller
             ];
         }
         return $response;
-       
+
     }
 
+    // ham tao moi don hang
     public function saveOrder(Request $request){
         try{
-          
+
             $selectProducts = $request->get('selectedProducts');
 
             // tạo instance mới để thêm vào order
             $order = new Order();
             $order->customer_name =  $request->get('name');
+            $order->prefix_name =Str::slug(Str::lower($request->get('name')),'');
             $order->customer_phone = $request->get('phone');
             $order->customer_addres = $request->get('address');
             $order->total_price = $request->get('total_price');

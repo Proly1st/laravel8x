@@ -89,8 +89,8 @@ Route::get('/select-order', [QuanLyDonHangController::class,'showDonHang']);
 //route lay du lieu bang order detail
 Route::get('/select-orderDetail', [QuanLyDonHangController::class,'getOrderDetail']);
 
-//route lay du lieu bang order detail
-Route::post('/duyetdonhang', [QuanLyDonHangController::class,'duyetDonHang']);
+//route tim kiem du lieu bang order
+Route::get('/searchOrder', [QuanLyDonHangController::class,'searchDonHang']);
 
 
 

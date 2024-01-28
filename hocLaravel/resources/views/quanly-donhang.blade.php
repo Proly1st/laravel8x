@@ -90,10 +90,14 @@
                 <table class="table table-striped table-bordered" id="example-1"></table>
                 <div class="card">
                     <div class="card-header">
-                        <h5>Edit Categories</h5>
+                        <h5>Quản lý đơn hàng</h5>
 
-                        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i class="icofont icofont-plus m-r-5"></i> Add Category
-                        </button>
+                        <div class="input-group mt-3">
+                            <input id="inputSearch" type="text" class="form-control" placeholder="Tìm kiếm đơn hàng">
+                            <div class="input-group-append">
+                                <button id="searchOrder" class="btn btn-primary" type="button">Tìm kiếm</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-block">
                         <div class="table-responsive">
@@ -118,36 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Add Contact Start Model start-->
-                <div class="md-modal md-effect-13 addcontact" id="modal-13">
-                    <div class="md-content">
-                        <h3 class="f-26">Add Category</h3>
-                        <div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Name Category</span>
-                                <input id="CategoryName" type="text" class="form-control pname" placeholder="Category Name">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Description</span>
-                                <input id="decript" type="text" class="form-control pname" placeholder="Description">
-                            </div>
-                            <div class="input-group">
-                                <select id="statuss" class="form-control stock">
-                                    <option value="">---- Select Status ----</option>
-                                    <option value="1">Đang hoạt động</option>
-                                    <option value="0">Tạm ngưng</option>
-                                    <option value="-1">Đã bị xóa</option>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <button id="saveCategory" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Save</button>
-                                <button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block close_btn">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md-overlay"></div>
-                <!-- Edit With Button card end -->
+
                 <!-- start modal update -->
                 <div id="modal-container" class="modala">
                     <div class="md-content">
@@ -170,6 +145,13 @@
 
                                 </tbody>
                             </table>
+                            <div class="input-group">
+                                <select id="selectStatus" class="form-control stock">
+                                    <option value="1">Chờ duyệt</option>
+                                    <option value="2">Đã duyệt</option>
+                                    <option value="3">Hoàn thành</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="text-center">
                             <button id="saveStatus" type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block save_btn">Duyệt đơn hàng</button>

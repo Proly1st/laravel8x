@@ -175,7 +175,9 @@ $(document).on('click','#submitCart',function(){
           let expiresDate = new Date();
           expiresDate.setMonth(expiresDate.getMonth()+3);
           $.cookie("cart",JSON.stringify(cartItems),{expires:expiresDate});
-
+            setTimeout(function (){
+                window.location.href="/cart";
+            },3000);
         }else{
           console.log(res.data.message);
           CustomPNotify('Thông báo', 'Đặt hàng thất bại','error');

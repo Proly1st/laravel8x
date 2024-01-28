@@ -11,12 +11,14 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
+
 class ProductController extends Controller
 {
-  
+
     public function index(){
-        
-        
+
+
         return view('products');
     }
 
@@ -25,7 +27,7 @@ class ProductController extends Controller
         return view('categories');
     }
 
-    
+
     // ham them category
     public function addCategories(Request $request){
         try {
@@ -65,13 +67,13 @@ class ProductController extends Controller
             ];
             return $response;
         }
- 
+
     }
 
     // ham sửa categories
     public function editCategories(Request $request){
         try {
-           
+
             $name = $request -> get('nameCategory');
             $exitstingCategory = Categories::where('name',$name)->first();
             if($exitstingCategory && $exitstingCategory !== $request->get('cateID')  ){
@@ -108,10 +110,10 @@ class ProductController extends Controller
             ];
             return $response;
         }
- 
+
     }
 
-    
+
     // ham sửa status product
     public function updateStatusCategory(Request $request){
         try{
@@ -138,7 +140,7 @@ class ProductController extends Controller
     // hàm xóa categories
     public function deleteCategories( Request $request){
         try{
-             
+
              // Kiểm tra xem category có tồn tại không
             $categoryId = $request->get('cateID');
             $category = Categories::find($categoryId);
@@ -149,7 +151,7 @@ class ProductController extends Controller
                     'message'=> 'danh mục không tồn tại',
                     'data'=>null
                 ];
-             
+
             }else{
                 $hasProducts = Product::where('category_id', $categoryId)->exists();
                 if ($hasProducts) {
@@ -159,7 +161,7 @@ class ProductController extends Controller
                         'message'=> 'Không thể xóa category vì có sản phẩm sử dụng nó',
                         'data'=>null
                     ];
-                }else{  
+                }else{
                     // Xóa category
                     $category->delete();
                     $response=[
@@ -169,17 +171,17 @@ class ProductController extends Controller
                     ];
                 }
 
-            }   
-            
+            }
+
         }catch(Exception $ex){
             $response=[
                 'status'=>500,
                 'message'=> $ex->getMessage(),
                 'data'=>null
             ];
-        
+
         }
-      
+
        return $response;
     }
 
@@ -208,7 +210,7 @@ class ProductController extends Controller
             ];
             return $response;
         }
-       
+
     }
 
     // ham show product
@@ -241,19 +243,20 @@ class ProductController extends Controller
                 $response = [
                     'status' => 500,
                     'message' => 'Tên sản phẩm đã tồn tại',
-                  
+
                     'data' => null
                 ];
                  return $response;
 
             }
             $product = Product::findOrFail($request->get('id'));
-            $product->name = $request -> get('name'); 
-            $product->inventory = $request -> get('inventory'); 
+            $product->name = $request -> get('name');
+            $product->prefix=Str::slug(Str::lower($request->get('name')),'');
+            $product->inventory = $request -> get('inventory');
             $product->description= $request -> get('description');
             $product->status = $request -> get('status');
             $product->price = $request -> get('price');
-            
+
             $product->save();
             $response=[
                 'status'=>200,
@@ -291,7 +294,7 @@ class ProductController extends Controller
         }
         return $response;
     }
-    
+
     // ham them product
     public function AddProduct(Request $request){
        try{
@@ -311,6 +314,7 @@ class ProductController extends Controller
                 $product->image  = Storage::url($image);
 
                 $product->name = $request->get('name');
+                $product->prefix=Str::slug(Str::lower($request->get('name')),'');
                 $product->category_id = $request->get('id_category');
                 $product->inventory = $request->get('inventory');
                 $product->description = $request->get('description');
@@ -342,7 +346,7 @@ class ProductController extends Controller
             'data'=>null
         ];
        }
-        
+
     return $response;
 
     }
@@ -351,9 +355,9 @@ class ProductController extends Controller
     // ham xóa product
     public function deleteProduct( Request $request){
         try{
-            
+
             // Kiểm tra xem product có tồn tại không
-            
+
             $product = Product::find( $request->get('id'));
             if (!$product) {
             // product không tồn tại, xử lý và trả về thông báo lỗi
@@ -362,8 +366,8 @@ class ProductController extends Controller
                     'message'=> 'id does not exits',
                     'data'=>null
                 ];
-            
-            }else{  
+
+            }else{
                     // Xóa category
                     $product->delete();
                     $response=[
@@ -379,9 +383,9 @@ class ProductController extends Controller
                 'message'=> $ex->getMessage(),
                 'data'=>null
             ];
-        
+
         }
-    
+
     return $response;
     }
 }

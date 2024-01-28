@@ -33,12 +33,12 @@ $(function(){
                         <td>${v.total_quantity}</td>
                         ${status}
 
-                        <td><button class="updCategory icon-button button-spacing" title="Sửa" onclick="updateCategory(this)" data-id="${v.id}" data-name="${v.customer_name}"  data-status ="${v.status}"><i class="fas fa-edit"></i></button>
+                        <td><button class="updCategory icon-button button-spacing" title="Sửa" onclick="updateOrder(this)" data-id="${v.id}"  data-status ="${v.status}"><i class="fas fa-edit"></i></button>
                         <span> </span>
                         </tr>`;
 
                 }
-                $('#example-2 tbody').append(data);
+                $('#example-2 tbody').html(data);
 
             }else {
                 console.log(response.data.message);
@@ -49,10 +49,25 @@ $(function(){
 
 })
 
-// hàm hiển thị modal update categories
+// hàm hiển thị modal update order
 let orderID;
-function updateCategory(button) {
+function updateOrder(button) {
     orderID = button.getAttribute('data-id');
+
+    switch (button.getAttribute('data-status')) {
+        case '0':
+            $('#selectStatus').val(0);
+            break;
+        case '2':
+            $('#selectStatus').val(2);
+            break;
+        case '3':
+            $('#selectStatus').val(3);
+            break;
+        default:
+            $('#selectStatus').val(1);
+            break;
+    }
     document.getElementById("modal-container").style.display = "block";
     axios({
         'mothod':'GET',
@@ -79,7 +94,6 @@ function updateCategory(button) {
 
             }
 
-
             $('#order-detail tbody').html(dataOrderDetail);
             // console.log(res.data);
         }else{
@@ -98,11 +112,13 @@ $(function() {
     $('#saveStatus').on('click', function () {
 
         console.log(orderID);
+
         axios({
             'method': 'POST',
             'url': 'duyetdonhang',
             'data': {
-                orderID : orderID
+                orderID : orderID,
+                orderStatus:$('#selectStatus').val()
             }
         }).then(function (res) {
             if (res.data.status === 200) {
@@ -123,6 +139,61 @@ $(function() {
     })
 })
 
+// hàm xử lý tìm kiếm order
+$('#searchOrder').on('click',function (){
+    let inputSearch=$('#inputSearch').val();
+    if(inputSearch){
+        axios({
+            'method':'GET',
+            'url':'searchOrder',
+            params: {
+                inputSearch: inputSearch
+            }
+        }).then(function (res){
+            if(res.data.status===200){
+                let data='';
+                for(const v of res.data.data){
+                    let status = '';
+                    switch (v.status) {
+                        case 0:
+                            status = '<td>Đang đặt</td>';
+                            break;
+                        case 2:
+                            status = '<td>Đã duyệt</td> ';
+                            break;
+
+                        case 3:
+                            status = '<td>Hoàn tất</td>';
+
+                            break;
+                        default:
+                            status = '<td>Chờ duyệt</td>';
+                            break;
+                    }
+                    data+=`<tr><td> ${v.id} </td>
+                        <td>${v.customer_name}</td>
+                        <td>${v.customer_phone}</td>
+                        <td>${v.customer_addres}</td>
+                        <td>${v.total_price}</td>
+                        <td>${v.total_quantity}</td>
+                        ${status}
+                        <td><button class="updCategory icon-button button-spacing" title="Sửa" onclick="updateOrder(this)" data-id="${v.id}"  data-status ="${v.status}"><i class="fas fa-edit"></i></button>
+                        <span> </span>
+                        </tr>`;
+
+                }
+                $('#example-2 tbody').html(data);
+            }else if(res.data.status===500){
+                CustomPNotify('Thông báo lỗi!', res.data.message, 'error')
+            }else{
+                CustomPNotify('Thông báo!!','Không tìm thấy sản phẩm phù hợp!', 'error')
+
+            }
+        })
+    }else{
+        CustomPNotify('Thông báo','Vui lòng nhập thông tin cần tìm kiếm!','error');
+    }
+})
 
 
 
@@ -142,51 +213,6 @@ function CustomPNotify(title, text,type){
     });
 }
 
-// hàm thêm
-// $(function(){
-//     $('#saveCategory').on('click',function(){
-//         let name = $('#CategoryName').val();
-//         let decript = $('#decript').val();
-//         let statuss = $('#statuss').val();
-//
-//         if(!isValidName(name)){
-//             CustomPNotify('Thông báo lỗi!','Tên danh mục phải lớn hơn 3 ký tự ','error');
-//             return;
-//         }else if(!isValidStatus(statuss)){
-//             CustomPNotify('Thông báo lỗi!','Status danh mục không hợp lệ','error');
-//             return;
-//         }else if(!isValidDescription(decript)){
-//             CustomPNotify('Thông báo lỗi!','Mô tả danh mục phải lớn hơn 10 ký tự ','error');
-//             return;
-//         }else{
-//             $('.md-modal').removeClass('md-show');
-//
-//             axios({
-//                 'method':'POST',
-//                 'url':'addcategory',
-//                 'data': {
-//                     nameCategory :name ,
-//                     decript :decript ,
-//                     statuss :statuss
-//                 }
-//             }).then(function(res){
-//                 if(res.data.status===200){
-//                     console.log(res.data.message);
-//                     CustomPNotify('Thông báo thành công','Danh mục đã được thêm mới thành công!','success');
-//
-//                     setTimeout(function() {
-//                         window.location.href = "/categories";
-//                     }, 1500);
-//                 }else{
-//                     console.log(res.data.message);
-//                     CustomPNotify('Thông báo lỗi!',res.data.message,'error');
-//
-//                 }
-//             })
-//         }
-//
-//     })
-// });
 
 
 

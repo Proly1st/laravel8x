@@ -8,6 +8,7 @@ class Product extends Model
 {
     protected $fillabale=[
         'name',
+        'prefix',
         'category_id',
         'inventory',
         'description',
@@ -19,7 +20,7 @@ class Product extends Model
 
     ];
     public function category(){
-        
+
         return $this->belongsTo(Categories::class);
     }
 }
